@@ -2,8 +2,6 @@
 
 import Image from "next/image";
 
-import Link from "next/link";
-
 import { useState } from "react";
 
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
@@ -226,25 +224,6 @@ export default function LoginForm() {
               "Login"
             )}
           </button>
-
-          {/* FORGOT PASSWORD */}
-          <p
-            className="
-              text-center
-              text-sm
-              text-gray-500
-            "
-          >
-            <Link
-              href="/forgot-password"
-              className="
-                text-rose-500
-                hover:underline
-              "
-            >
-              Lost your password?
-            </Link>
-          </p>
         </form>
       </div>
     </div>

@@ -29,29 +29,23 @@ export function useLogin() {
         password,
       });
 
-      localStorage.setItem("access_token", response.data.access_token);
-
-      router.push("/explore");
-    } catch (err: unknown) {
-      const appError = err as {
-        message?: string;
-
-        data?: {
-          email?: string;
-        };
-      };
-
-      if (
-        appError.message === "Email is not verified" &&
-        appError.data?.email
-      ) {
-        router.push(
-          `/verify-email?email=${encodeURIComponent(appError.data.email)}`,
+      // Validasi role
+      if (response.data.role !== "admin") {
+        await showErrorAlert(
+          "This account is not authorized to access the admin panel.",
+          "Access Denied",
         );
 
         return;
       }
 
+      localStorage.setItem(
+        "access_token",
+        response.data.access_token,
+      );
+
+      router.push("/");
+    } catch (err: unknown) {
       await showErrorAlert(
         getErrorMessage(err, "Failed to login"),
         "Login Failed",

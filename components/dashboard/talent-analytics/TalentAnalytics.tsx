@@ -1,6 +1,7 @@
 import OverviewCards from "./OverviewCards";
 import RegistrationChart from "./RegistrationChart";
 import RegistrationStatistics from "./RegistrationStatistics";
+import Demographics from "./Demographics";
 
 export default function TalentAnalytics() {
   return (
@@ -11,15 +12,7 @@ export default function TalentAnalytics() {
 
       <RegistrationStatistics />
 
-      {/* GenderDistributionChart */}
-
-      {/* NationalityDistributionChart */}
-
-      {/* CountryDistributionChart */}
-
-      {/* CityDistributionChart */}
-
-      {/* AgeDistributionChart */}
+      <Demographics />
     </section>
   );
 }

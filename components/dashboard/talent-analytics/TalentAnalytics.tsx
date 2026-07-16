@@ -1,7 +1,6 @@
-"use client";
-
 import OverviewCards from "./OverviewCards";
 import RegistrationChart from "./RegistrationChart";
+import RegistrationStatistics from "./RegistrationStatistics";
 
 export default function TalentAnalytics() {
   return (
@@ -9,6 +8,8 @@ export default function TalentAnalytics() {
       <OverviewCards />
 
       <RegistrationChart />
+
+      <RegistrationStatistics />
 
       {/* GenderDistributionChart */}
 

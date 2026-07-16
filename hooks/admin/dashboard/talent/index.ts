@@ -1,19 +1,19 @@
-export * from "./useRegisteredTalents";
+export * from "./useGetRegisteredTalents";
 
-export * from "./useCompletedProfiles";
+export * from "./useGetCompletedProfiles";
 
-export * from "./useRegistrationStatistics";
+export * from "./useGetRegistrationStatistics";
 
 export * from "./useGetRegistrationChart";
 
-export * from "./useUnverifiedTalents";
+export * from "./useGetUnverifiedTalents";
 
-export * from "./useGenderDistribution";
+export * from "./useGetGenderDistribution";
 
-export * from "./useNationalityDistribution";
+export * from "./useGetNationalityDistribution";
 
-export * from "./useCountryDistribution";
+export * from "./useGetCountryDistribution";
 
-export * from "./useCityDistribution";
+export * from "./useGetCityDistribution";
 
-export * from "./useAgeDistribution";
+export * from "./useGetAgeDistribution";

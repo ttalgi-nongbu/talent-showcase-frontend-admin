@@ -7,6 +7,7 @@ export const API_ENDPOINTS = {
   auth: {
     login: `${API_URL}/auth/login`,
     refreshToken: `${API_URL}/auth/refresh-token`,
+    logout: `${API_URL}/auth/logout`,
   },
 
   //

@@ -4,6 +4,8 @@ import { useEffect } from "react";
 
 import { useRouter } from "next/navigation";
 
+import Sidebar from "@/components/shared/Sidebar";
+
 import { AccountProvider, useAccount } from "@/contexts/AccountContext";
 
 export default function MainLayout({
@@ -48,11 +50,32 @@ function MainLayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <div
       className="
-        min-h-screen
+        h-screen
+        overflow-hidden
         bg-zinc-100
       "
     >
-      {children}
+      <div
+        className="
+          flex
+          h-full
+        "
+      >
+        {/* SIDEBAR */}
+        <Sidebar />
+
+        {/* RIGHT SIDE */}
+        <main
+          id="main-scroll-container"
+          className="
+            min-w-0
+            flex-1
+            overflow-y-auto
+          "
+        >
+          {children}
+        </main>
+      </div>
     </div>
   );
 }

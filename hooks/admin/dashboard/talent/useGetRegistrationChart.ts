@@ -6,10 +6,10 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getRegistrationChart } from "@/services/admin/dashboard/talent/registration-chart";
 
-export function useRegistrationChart() {
+export function useRegistrationChart(period: "week" | "month" | "year") {
   const { data, error, isLoading, mutate } = useSWR(
-    "registration-chart",
-    getRegistrationChart,
+    ["registration-chart", period],
+    () => getRegistrationChart(period),
   );
 
   return {

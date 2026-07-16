@@ -1,5 +1,7 @@
 "use client";
 
+import { useState } from "react";
+
 import {
   CartesianGrid,
   Line,
@@ -13,32 +15,9 @@ import {
 import { useRegistrationChart } from "@/hooks/admin/dashboard/talent";
 
 export default function RegistrationChart() {
-  const { registrationChart, loading } = useRegistrationChart();
+  const [period, setPeriod] = useState<"week" | "month" | "year">("month");
 
-  if (loading) {
-    return (
-      <div
-        className="
-          mt-6
-          rounded-2xl
-          border
-          border-gray-200
-          bg-white
-          p-6
-          shadow-sm
-        "
-      >
-        <div
-          className="
-            h-80
-            animate-pulse
-            rounded-xl
-            bg-gray-100
-          "
-        />
-      </div>
-    );
-  }
+  const { registrationChart, loading } = useRegistrationChart(period);
 
   const data =
     registrationChart?.map((item) => ({
@@ -62,26 +41,63 @@ export default function RegistrationChart() {
       "
     >
       {/* HEADER */}
-      <div>
-        <h2
-          className="
-            text-lg
-            font-semibold
-            text-gray-900
-          "
-        >
-          Registration Trend
-        </h2>
+      <div
+        className="
+          flex
+          items-start
+          justify-between
+          gap-4
+        "
+      >
+        <div>
+          <h2
+            className="
+              text-lg
+              font-semibold
+              text-gray-900
+            "
+          >
+            Registration Trend
+          </h2>
 
-        <p
+          <p
+            className="
+              mt-1
+              text-sm
+              text-gray-500
+            "
+          >
+            Talent registrations over time.
+          </p>
+        </div>
+
+        <select
+          value={period}
+          onChange={(e) =>
+            setPeriod(e.target.value as "week" | "month" | "year")
+          }
           className="
-            mt-1
+            rounded-lg
+            border
+            border-gray-300
+            bg-white
+            px-3
+            py-2
             text-sm
-            text-gray-500
+            text-gray-700
+            outline-none
+            transition
+            focus:border-rose-500
+            focus:ring-2
+            focus:ring-rose-200
           "
         >
-          Talent registrations during the last 30 days.
-        </p>
+          <option value="week">Last 7 Days</option>
+
+          <option value="month">Last 30 Days</option>
+
+          <option value="year">Last 12 Months</option>
+        </select>
       </div>
 
       {/* CHART */}
@@ -91,26 +107,41 @@ export default function RegistrationChart() {
           h-80
         "
       >
-        <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data}>
-            <CartesianGrid strokeDasharray="3 3" />
+        {loading ? (
+          <div
+            className="
+              h-full
+              animate-pulse
+              rounded-xl
+              bg-gray-100
+            "
+          />
+        ) : (
+          <ResponsiveContainer width="100%" height="100%">
+            <LineChart data={data}>
+              <CartesianGrid strokeDasharray="3 3" />
 
-            <XAxis dataKey="date" />
+              <XAxis dataKey="date" />
 
-            <YAxis allowDecimals={false} />
+              <YAxis allowDecimals={false} />
 
-            <Tooltip />
+              <Tooltip />
 
-            <Line
-              type="monotone"
-              dataKey="total"
-              stroke="#f43f5e"
-              strokeWidth={3}
-              dot={{ r: 3 }}
-              activeDot={{ r: 5 }}
-            />
-          </LineChart>
-        </ResponsiveContainer>
+              <Line
+                type="monotone"
+                dataKey="total"
+                stroke="#f43f5e"
+                strokeWidth={3}
+                dot={{
+                  r: 3,
+                }}
+                activeDot={{
+                  r: 5,
+                }}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+        )}
       </div>
     </div>
   );

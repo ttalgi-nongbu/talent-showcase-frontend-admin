@@ -4,7 +4,7 @@ export * from "./useCompletedProfiles";
 
 export * from "./useRegistrationStatistics";
 
-export * from "./useRegistrationChart";
+export * from "./useGetRegistrationChart";
 
 export * from "./useUnverifiedTalents";
 

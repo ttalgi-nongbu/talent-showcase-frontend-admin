@@ -1,6 +1,6 @@
 "use client";
 
-import TalentAnalytics from "./TalentAnalytics";
+import TalentAnalytics from "./talent-analytics/TalentAnalytics";
 
 export default function Content() {
   return (

@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getRegisteredTalents } from "@/services/admin/dashboard/talent/registered-talents";
 
-export function useRegisteredTalents() {
+export function useGetRegisteredTalents() {
   const { data, error, isLoading, mutate } = useSWR(
     "registered-talents",
     getRegisteredTalents,

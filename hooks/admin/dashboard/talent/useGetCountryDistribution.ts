@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getCountryDistribution } from "@/services/admin/dashboard/talent/country-distribution";
 
-export function useCountryDistribution() {
+export function useGetCountryDistribution() {
   const { data, error, isLoading, mutate } = useSWR(
     "country-distribution",
     getCountryDistribution,

@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getCityDistribution } from "@/services/admin/dashboard/talent/city-distribution";
 
-export function useCityDistribution() {
+export function useGetCityDistribution() {
   const { data, error, isLoading, mutate } = useSWR(
     "city-distribution",
     getCityDistribution,

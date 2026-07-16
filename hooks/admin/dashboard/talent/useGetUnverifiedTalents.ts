@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getUnverifiedTalents } from "@/services/admin/dashboard/talent/unverified-talents";
 
-export function useUnverifiedTalents() {
+export function useGetUnverifiedTalents() {
   const { data, error, isLoading, mutate } = useSWR(
     "unverified-talents",
     getUnverifiedTalents,

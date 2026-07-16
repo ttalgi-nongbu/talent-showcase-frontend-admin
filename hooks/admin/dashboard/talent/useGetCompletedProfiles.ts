@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getCompletedProfiles } from "@/services/admin/dashboard/talent/completed-profiles";
 
-export function useCompletedProfiles() {
+export function useGetCompletedProfiles() {
   const { data, error, isLoading, mutate } = useSWR(
     "completed-profiles",
     getCompletedProfiles,

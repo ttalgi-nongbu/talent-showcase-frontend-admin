@@ -7,26 +7,26 @@ import {
 } from "@heroicons/react/24/outline";
 
 import {
-  useCompletedProfiles,
-  useRegisteredTalents,
-  useUnverifiedTalents,
+  useGetCompletedProfiles,
+  useGetRegisteredTalents,
+  useGetUnverifiedTalents,
 } from "@/hooks/admin/dashboard/talent";
 
 export default function OverviewCards() {
   //
   // registered talents
   //
-  const { registeredTalents } = useRegisteredTalents();
+  const { registeredTalents } = useGetRegisteredTalents();
 
   //
   // completed profiles
   //
-  const { completedProfiles } = useCompletedProfiles();
+  const { completedProfiles } = useGetCompletedProfiles();
 
   //
   // unverified talents
   //
-  const { unverifiedTalents } = useUnverifiedTalents();
+  const { unverifiedTalents } = useGetUnverifiedTalents();
 
   return (
     <div

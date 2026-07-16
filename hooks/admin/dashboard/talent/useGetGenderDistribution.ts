@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getGenderDistribution } from "@/services/admin/dashboard/talent/gender-distribution";
 
-export function useGenderDistribution() {
+export function useGetGenderDistribution() {
   const { data, error, isLoading, mutate } = useSWR(
     "gender-distribution",
     getGenderDistribution,

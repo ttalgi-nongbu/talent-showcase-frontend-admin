@@ -12,12 +12,12 @@ import {
   YAxis,
 } from "recharts";
 
-import { useRegistrationChart } from "@/hooks/admin/dashboard/talent";
+import { useGetRegistrationChart } from "@/hooks/admin/dashboard/talent";
 
 export default function RegistrationChart() {
   const [period, setPeriod] = useState<"week" | "month" | "year">("month");
 
-  const { registrationChart, loading } = useRegistrationChart(period);
+  const { registrationChart, loading } = useGetRegistrationChart(period);
 
   const data =
     registrationChart?.map((item) => ({

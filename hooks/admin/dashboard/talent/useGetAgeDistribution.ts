@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getAgeDistribution } from "@/services/admin/dashboard/talent/age-distribution";
 
-export function useAgeDistribution() {
+export function useGetAgeDistribution() {
   const { data, error, isLoading, mutate } = useSWR(
     "age-distribution",
     getAgeDistribution,

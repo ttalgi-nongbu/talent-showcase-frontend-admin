@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getRegistrationStatistics } from "@/services/admin/dashboard/talent/registration-statistics";
 
-export function useRegistrationStatistics() {
+export function useGetRegistrationStatistics() {
   const { data, error, isLoading, mutate } = useSWR(
     "registration-statistics",
     getRegistrationStatistics,

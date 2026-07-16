@@ -1,23 +1,51 @@
 "use client";
 
-import useSWR from "swr";
+import { useCallback, useEffect, useState } from "react";
 
 import { getErrorMessage } from "@/lib/error";
 
 import { getAccount } from "@/services/user";
 
+import type { Account } from "@/types/user";
+
 export function useGetAccount() {
-  const { data, error, isLoading, mutate } = useSWR("account", getAccount);
+  const [account, setAccount] = useState<Account | null>(null);
+
+  const [loading, setLoading] = useState(true);
+
+  const [error, setError] = useState("");
+
+  const refresh = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      const response = await getAccount();
+
+      setAccount(response.data);
+
+      setError("");
+    } catch (err: unknown) {
+      setAccount(null);
+
+      setError(getErrorMessage(err, "Failed to get account"));
+    } finally {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    refresh();
+  }, [refresh]);
 
   return {
-    account: data?.data ?? null,
+    account,
 
-    loading: isLoading,
+    loading,
 
-    error: error ? getErrorMessage(error, "Failed to get account") : "",
+    error,
 
     actions: {
-      refresh: mutate,
+      refresh,
     },
   };
 }

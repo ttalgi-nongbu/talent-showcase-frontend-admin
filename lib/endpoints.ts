@@ -10,6 +10,13 @@ export const API_ENDPOINTS = {
   },
 
   //
+  // USER
+  //
+  user: {
+    account: `${API_URL}/user`,
+  },
+
+  //
   // ADMIN
   //
   admin: {

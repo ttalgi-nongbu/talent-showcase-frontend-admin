@@ -1,7 +1,24 @@
-export default function HomePage() {
+import Content from "@/components/dashboard/Content";
+
+export default function DashboardPage() {
   return (
-    <main>
-      <h1>Hello World</h1>
-    </main>
+    <div
+      className="
+        bg-gray-100
+        px-0
+        pb-6
+        sm:p-6
+      "
+    >
+      <div
+        className="
+          mx-auto
+          w-full
+          max-w-[1150px]
+        "
+      >
+        <Content />
+      </div>
+    </div>
   );
 }

@@ -1,5 +1,9 @@
 "use client";
 
+import { formatDateTime } from "@/lib/time";
+
+import { capitalize } from "@/lib/string";
+
 import { useGetTalents } from "@/hooks/admin/talent/useGetTalents";
 
 export default function Content() {
@@ -39,6 +43,7 @@ export default function Content() {
       <div
         className="
           mt-8
+          overflow-hidden
           rounded-2xl
           border
           border-gray-200
@@ -69,7 +74,7 @@ export default function Content() {
                     text-gray-700
                   "
                 >
-                  Talent
+                  Username
                 </th>
 
                 <th
@@ -95,7 +100,7 @@ export default function Content() {
                     text-gray-700
                   "
                 >
-                  Email Verified
+                  Email
                 </th>
 
                 <th
@@ -145,8 +150,9 @@ export default function Content() {
                   <td
                     colSpan={6}
                     className="
-                      py-16
+                      py-20
                       text-center
+                      text-sm
                       text-gray-500
                     "
                   >
@@ -158,8 +164,9 @@ export default function Content() {
                   <td
                     colSpan={6}
                     className="
-                      py-16
+                      py-20
                       text-center
+                      text-sm
                       text-red-500
                     "
                   >
@@ -171,42 +178,56 @@ export default function Content() {
                   <td
                     colSpan={6}
                     className="
-                      py-16
+                      py-20
                       text-center
-                      text-gray-500
                     "
                   >
-                    No talents found.
+                    <h2
+                      className="
+                        text-lg
+                        font-semibold
+                        text-gray-700
+                      "
+                    >
+                      No talents found
+                    </h2>
+
+                    <p
+                      className="
+                        mt-2
+                        text-sm
+                        text-gray-500
+                      "
+                    >
+                      There are no registered talents yet.
+                    </p>
                   </td>
                 </tr>
               ) : (
                 talents.map((talent) => (
-                  <tr key={talent.id} className="border-b border-gray-100">
+                  <tr
+                    key={talent.id}
+                    className="
+                      border-b
+                      border-gray-100
+                      transition-colors
+                      hover:bg-gray-50
+                    "
+                  >
                     <td
                       className="
                         px-6
                         py-4
                       "
                     >
-                      <div>
-                        <p
-                          className="
-                            font-medium
-                            text-gray-900
-                          "
-                        >
-                          {talent.username}
-                        </p>
-
-                        <p
-                          className="
-                            text-sm
-                            text-gray-500
-                          "
-                        >
-                          #{talent.id}
-                        </p>
-                      </div>
+                      <span
+                        className="
+                          font-medium
+                          text-gray-900
+                        "
+                      >
+                        @{talent.username}
+                      </span>
                     </td>
 
                     <td
@@ -226,35 +247,23 @@ export default function Content() {
                         text-center
                       "
                     >
-                      {talent.email_verified ? (
-                        <span
-                          className="
-                            rounded-full
-                            bg-green-100
-                            px-3
-                            py-1
-                            text-xs
-                            font-medium
-                            text-green-700
-                          "
-                        >
-                          Verified
-                        </span>
-                      ) : (
-                        <span
-                          className="
-                            rounded-full
-                            bg-yellow-100
-                            px-3
-                            py-1
-                            text-xs
-                            font-medium
-                            text-yellow-700
-                          "
-                        >
-                          Pending
-                        </span>
-                      )}
+                      <span
+                        className={`
+                          inline-flex
+                          rounded-full
+                          px-3
+                          py-1
+                          text-xs
+                          font-medium
+                          ${
+                            talent.email_verified
+                              ? "bg-green-100 text-green-700"
+                              : "bg-yellow-100 text-yellow-700"
+                          }
+                        `}
+                      >
+                        {talent.email_verified ? "Verified" : "Pending"}
+                      </span>
                     </td>
 
                     <td
@@ -265,17 +274,21 @@ export default function Content() {
                       "
                     >
                       <span
-                        className="
+                        className={`
+                          inline-flex
                           rounded-full
-                          bg-gray-100
                           px-3
                           py-1
                           text-xs
                           font-medium
-                          text-gray-700
-                        "
+                          ${
+                            talent.status === "active"
+                              ? "bg-green-100 text-green-700"
+                              : "bg-red-100 text-red-700"
+                          }
+                        `}
                       >
-                        {talent.status}
+                        {capitalize(talent.status)}
                       </span>
                     </td>
 
@@ -284,10 +297,11 @@ export default function Content() {
                         px-6
                         py-4
                         text-center
-                        text-gray-700
+                        text-sm
+                        text-gray-500
                       "
                     >
-                      {talent.registration_at}
+                      {formatDateTime(talent.registration_at)}
                     </td>
 
                     <td
@@ -299,6 +313,7 @@ export default function Content() {
                     >
                       <button
                         className="
+                          cursor-pointer
                           rounded-lg
                           border
                           border-gray-300
@@ -306,7 +321,9 @@ export default function Content() {
                           py-2
                           text-sm
                           font-medium
-                          hover:bg-gray-50
+                          text-gray-700
+                          transition-colors
+                          hover:bg-gray-100
                         "
                       >
                         View

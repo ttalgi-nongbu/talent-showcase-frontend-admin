@@ -56,8 +56,8 @@ export default function Sidebar() {
       icon: Squares2X2Icon,
     },
     {
-      name: "User Management",
-      href: "/users",
+      name: "Talent Management",
+      href: "/talents",
       icon: UsersIcon,
     },
   ];

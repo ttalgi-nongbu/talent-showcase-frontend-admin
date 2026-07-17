@@ -1,4 +1,4 @@
-import Content from "@/components/user-management/Content";
+import Content from "@/components/talent-management/Content";
 
 export default function UserManagementPage() {
   return (

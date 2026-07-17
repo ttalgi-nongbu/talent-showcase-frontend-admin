@@ -6,10 +6,10 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getProfilePhotoChart } from "@/services/admin/dashboard/profile-photo/profile-photo-chart";
 
-export function useGetProfilePhotoChart() {
+export function useGetProfilePhotoChart(period: "week" | "month" | "year") {
   const { data, error, isLoading, mutate } = useSWR(
-    "profile-photo-chart",
-    getProfilePhotoChart,
+    ["profile-photo-chart", period],
+    () => getProfilePhotoChart(period),
   );
 
   return {

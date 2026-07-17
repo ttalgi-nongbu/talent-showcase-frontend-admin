@@ -23,9 +23,17 @@ export interface Pagination {
 //
 // GET TALENTS
 //
-export interface GetTalentsResponse {
+export interface GetTalents {
   talents: Talent[];
   pagination: Pagination;
+}
+
+export interface GetTalentsResponse {
+  data: GetTalents;
+
+  message: string;
+
+  success: boolean;
 }
 
 //
@@ -52,7 +60,7 @@ export interface TalentStatistics {
 //
 // GET TALENT
 //
-export interface GetTalentResponse {
+export interface GetTalent {
   id: number;
   username: string;
   email: string;
@@ -61,7 +69,16 @@ export interface GetTalentResponse {
   registration_at: string;
 
   profile: TalentProfile;
+
   statistics: TalentStatistics;
+}
+
+export interface GetTalentResponse {
+  data: GetTalent;
+
+  message: string;
+
+  success: boolean;
 }
 
 //

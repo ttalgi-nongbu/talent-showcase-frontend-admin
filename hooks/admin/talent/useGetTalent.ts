@@ -13,7 +13,7 @@ export function useGetTalent(id: number) {
   );
 
   return {
-    talent: data,
+    talent: data?.data ?? null,
 
     loading: isLoading,
 

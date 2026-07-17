@@ -1,29 +1,32 @@
 "use client";
 
-import { getErrorMessage } from "@/lib/error";
+import { useState } from "react";
 
 import { updateTalentStatus } from "@/services/admin/talent/update-talent-status";
 
 import { UpdateTalentStatusRequest } from "@/types/admin/talent";
 
 export function useUpdateTalentStatus() {
-  const update = async (id: number, payload: UpdateTalentStatusRequest) => {
-    try {
-      await updateTalentStatus(id, payload);
+  const [loading, setLoading] = useState(false);
 
-      return {
-        success: true,
-        error: "",
-      };
-    } catch (error) {
-      return {
-        success: false,
-        error: getErrorMessage(error, "Failed to update talent status"),
-      };
+  const handleUpdateTalentStatus = async (
+    id: number,
+    payload: UpdateTalentStatusRequest,
+  ) => {
+    try {
+      setLoading(true);
+
+      return await updateTalentStatus(id, payload);
+    } finally {
+      setLoading(false);
     }
   };
 
   return {
-    update,
+    loading,
+
+    actions: {
+      handleUpdateTalentStatus,
+    },
   };
 }

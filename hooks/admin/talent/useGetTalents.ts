@@ -14,9 +14,9 @@ export function useGetTalents(params: GetTalentsParams) {
   );
 
   return {
-    talents: data?.talents ?? [],
+    talents: data?.data.talents ?? [],
 
-    pagination: data?.pagination,
+    pagination: data?.data.pagination ?? null,
 
     loading: isLoading,
 

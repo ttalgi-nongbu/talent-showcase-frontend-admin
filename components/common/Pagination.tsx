@@ -65,6 +65,7 @@ export default function Pagination({
         "
       >
         <button
+          type="button"
           onClick={() => onPageChange(page - 1)}
           disabled={page === 1}
           className="
@@ -101,6 +102,7 @@ export default function Pagination({
           ) : (
             <button
               key={item}
+              type="button"
               onClick={() => onPageChange(item)}
               className={`
                 flex
@@ -117,7 +119,7 @@ export default function Pagination({
                 transition-colors
                 ${
                   page === item
-                    ? "border-rose-600 bg-rose-600 text-white"
+                    ? "border-rose-500 bg-rose-500 text-white"
                     : "border-gray-300 text-gray-700 hover:border-rose-300 hover:bg-rose-50"
                 }
               `}
@@ -128,6 +130,7 @@ export default function Pagination({
         )}
 
         <button
+          type="button"
           onClick={() => onPageChange(page + 1)}
           disabled={page === totalPages}
           className="

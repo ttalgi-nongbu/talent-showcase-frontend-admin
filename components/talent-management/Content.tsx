@@ -1,14 +1,20 @@
 "use client";
 
+import { useState } from "react";
+
 import { formatDateTime } from "@/lib/time";
 
 import { capitalize } from "@/lib/string";
 
 import { useGetTalents } from "@/hooks/admin/talent/useGetTalents";
 
+import Pagination from "@/components/common/Pagination";
+
 export default function Content() {
-  const { talents, loading, error } = useGetTalents({
-    page: "1",
+  const [page, setPage] = useState(1);
+
+  const { talents, pagination, loading, error } = useGetTalents({
+    page: page.toString(),
     limit: "10",
   });
 
@@ -336,6 +342,12 @@ export default function Content() {
           </table>
         </div>
       </div>
+
+      <Pagination
+        page={page}
+        totalPages={pagination?.total_pages ?? 1}
+        onPageChange={setPage}
+      />
     </section>
   );
 }

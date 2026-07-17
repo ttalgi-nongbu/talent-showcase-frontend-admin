@@ -1,5 +1,6 @@
 "use client";
 
+import EngagementChart from "./EngagementChart";
 import OverviewCards from "./OverviewCards";
 
 export default function TalentAnalytics() {
@@ -7,6 +8,9 @@ export default function TalentAnalytics() {
     <>
       {/* OVERVIEW */}
       <OverviewCards />
+
+      {/* ENGAGEMENT CHART */}
+      <EngagementChart />
     </>
   );
 }

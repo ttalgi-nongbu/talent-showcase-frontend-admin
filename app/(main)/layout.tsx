@@ -50,28 +50,37 @@ function MainLayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <div
       className="
-        h-screen
-        overflow-hidden
-        bg-zinc-100
-      "
+      h-screen
+      overflow-hidden
+      bg-zinc-100
+    "
     >
       <div
         className="
-          flex
-          h-full
-        "
+        flex
+        h-full
+      "
       >
         {/* SIDEBAR */}
-        <Sidebar />
+        <div
+          className="
+          hidden
+          lg:block
+        "
+        >
+          <Sidebar />
+        </div>
 
         {/* RIGHT SIDE */}
         <main
           id="main-scroll-container"
           className="
-            min-w-0
-            flex-1
-            overflow-y-auto
-          "
+          min-w-0
+          flex-1
+          overflow-y-auto
+          pb-16
+          lg:pb-0
+        "
         >
           {children}
         </main>

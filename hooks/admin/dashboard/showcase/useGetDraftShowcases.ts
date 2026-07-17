@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getDraftShowcases } from "@/services/admin/dashboard/showcase/draft-showcases";
 
-export function useDraftShowcases() {
+export function useGetDraftShowcases() {
   const { data, error, isLoading, mutate } = useSWR(
     "draft-showcases",
     getDraftShowcases,

@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import ShowcaseAnalytics from "./showcase-analytics/ShowcaseAnalytics";
 import TalentAnalytics from "./talent-analytics/TalentAnalytics";
 
 export default function Content() {
@@ -93,22 +94,7 @@ export default function Content() {
 
       {/* CONTENT */}
       <div className="mt-6">
-        {tab === "showcase" ? (
-          <div
-            className="
-              rounded-2xl
-              border
-              border-gray-200
-              bg-white
-              p-6
-              shadow-sm
-            "
-          >
-            Hello World
-          </div>
-        ) : (
-          <TalentAnalytics />
-        )}
+        {tab === "showcase" ? <ShowcaseAnalytics /> : <TalentAnalytics />}
       </div>
     </>
   );

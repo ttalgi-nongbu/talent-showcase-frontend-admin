@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getShowcaseStatistics } from "@/services/admin/dashboard/showcase/showcase-statistics";
 
-export function useShowcaseStatistics() {
+export function useGetShowcaseStatistics() {
   const { data, error, isLoading, mutate } = useSWR(
     "showcase-statistics",
     getShowcaseStatistics,

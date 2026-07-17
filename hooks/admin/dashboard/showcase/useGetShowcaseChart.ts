@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getShowcaseChart } from "@/services/admin/dashboard/showcase/showcase-chart";
 
-export function useShowcaseChart() {
+export function useGetShowcaseChart() {
   const { data, error, isLoading, mutate } = useSWR(
     "showcase-chart",
     getShowcaseChart,

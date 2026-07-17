@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getShowcaseCategoryDistribution } from "@/services/admin/dashboard/showcase/showcase-category-distribution";
 
-export function useShowcaseCategoryDistribution() {
+export function useGetShowcaseCategoryDistribution() {
   const { data, error, isLoading, mutate } = useSWR(
     "showcase-category-distribution",
     getShowcaseCategoryDistribution,

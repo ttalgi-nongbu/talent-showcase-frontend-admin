@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getShowcaseLanguageDistribution } from "@/services/admin/dashboard/showcase/showcase-language-distribution";
 
-export function useShowcaseLanguageDistribution() {
+export function useGetShowcaseLanguageDistribution() {
   const { data, error, isLoading, mutate } = useSWR(
     "showcase-language-distribution",
     getShowcaseLanguageDistribution,

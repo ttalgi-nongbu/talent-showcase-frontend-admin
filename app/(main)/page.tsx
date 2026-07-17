@@ -6,7 +6,6 @@ export default function DashboardPage() {
       className="
         bg-gray-100
         px-0
-        pb-6
         sm:p-6
       "
     >

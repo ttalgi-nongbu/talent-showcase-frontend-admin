@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getPublishedShowcases } from "@/services/admin/dashboard/showcase/published-showcases";
 
-export function usePublishedShowcases() {
+export function useGetPublishedShowcases() {
   const { data, error, isLoading, mutate } = useSWR(
     "published-showcases",
     getPublishedShowcases,

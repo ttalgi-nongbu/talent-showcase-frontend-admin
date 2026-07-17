@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import EngagementAnalytics from "./engagement-analytics/EngagementAnalytics";
 import PhotoAnalytics from "./photo-analytics/PhotoAnalytics";
 import ShowcaseAnalytics from "./showcase-analytics/ShowcaseAnalytics";
 import TalentAnalytics from "./talent-analytics/TalentAnalytics";
@@ -39,6 +40,14 @@ export default function Content() {
     router.replace(`${pathname}?${params.toString()}`);
   }
 
+  function goToEngagement() {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("tab", "engagement");
+
+    router.replace(`${pathname}?${params.toString()}`);
+  }
+
   return (
     <>
       {/* TITLE */}
@@ -72,7 +81,7 @@ export default function Content() {
             font-medium
             transition-colors
             ${
-              tab !== "showcase" && tab !== "photo"
+              tab !== "showcase" && tab !== "photo" && tab !== "engagement"
                 ? "border-black text-black"
                 : "border-transparent text-gray-500 hover:text-black"
             }
@@ -118,6 +127,25 @@ export default function Content() {
         >
           Photo Analytics
         </button>
+
+        <button
+          onClick={goToEngagement}
+          className={`
+            cursor-pointer
+            border-b-2
+            pb-3
+            text-sm
+            font-medium
+            transition-colors
+            ${
+              tab === "engagement"
+                ? "border-black text-black"
+                : "border-transparent text-gray-500 hover:text-black"
+            }
+          `}
+        >
+          Engagement Analytics
+        </button>
       </div>
 
       {/* CONTENT */}
@@ -126,6 +154,8 @@ export default function Content() {
           <ShowcaseAnalytics />
         ) : tab === "photo" ? (
           <PhotoAnalytics />
+        ) : tab === "engagement" ? (
+          <EngagementAnalytics />
         ) : (
           <TalentAnalytics />
         )}

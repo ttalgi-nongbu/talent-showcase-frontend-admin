@@ -12,15 +12,15 @@ import {
   YAxis,
 } from "recharts";
 
-import { useGetShowcaseChart } from "@/hooks/admin/dashboard/showcase";
+import { useGetProfilePhotoChart } from "@/hooks/admin/dashboard/profile-photo";
 
-export default function ShowcaseChart() {
+export default function PhotoChart() {
   const [period, setPeriod] = useState<"week" | "month" | "year">("month");
 
-  const { showcaseChart, loading } = useGetShowcaseChart(period);
+  const { profilePhotoChart, loading } = useGetProfilePhotoChart(period);
 
   const data =
-    showcaseChart?.map((item) => ({
+    profilePhotoChart?.map((item) => ({
       ...item,
       date: new Date(item.date).toLocaleDateString("en-US", {
         month: "short",
@@ -57,7 +57,7 @@ export default function ShowcaseChart() {
               text-gray-900
             "
           >
-            Showcase Trend
+            Photo Trend
           </h2>
 
           <p
@@ -67,7 +67,7 @@ export default function ShowcaseChart() {
               text-gray-500
             "
           >
-            Showcases created over time.
+            Photos created over time.
           </p>
         </div>
 

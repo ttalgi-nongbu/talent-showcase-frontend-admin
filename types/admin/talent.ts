@@ -1,13 +1,12 @@
 //
-// USER
+// TALENT
 //
-export interface User {
+export interface Talent {
   id: number;
   username: string;
   email: string;
   email_verified: boolean;
   status: string;
-  role: string;
   registration_at: string;
 }
 
@@ -22,17 +21,17 @@ export interface Pagination {
 }
 
 //
-// GET USERS
+// GET TALENTS
 //
-export interface GetUsersResponse {
-  users: User[];
+export interface GetTalentsResponse {
+  talents: Talent[];
   pagination: Pagination;
 }
 
 //
-// USER PROFILE
+// TALENT PROFILE
 //
-export interface UserProfile {
+export interface TalentProfile {
   full_name: string;
   gender: string;
   nationality: string;
@@ -41,9 +40,9 @@ export interface UserProfile {
 }
 
 //
-// USER STATISTICS
+// TALENT STATISTICS
 //
-export interface UserStatistics {
+export interface TalentStatistics {
   showcases: number;
   profile_photos: number;
   followers: number;
@@ -51,35 +50,33 @@ export interface UserStatistics {
 }
 
 //
-// GET USER
+// GET TALENT
 //
-export interface GetUserResponse {
+export interface GetTalentResponse {
   id: number;
   username: string;
   email: string;
   email_verified: boolean;
   status: string;
-  role: string;
   registration_at: string;
 
-  profile: UserProfile | null;
-  statistics: UserStatistics | null;
+  profile: TalentProfile;
+  statistics: TalentStatistics;
 }
 
 //
-// UPDATE USER STATUS
+// UPDATE TALENT STATUS
 //
-export interface UpdateUserStatusRequest {
+export interface UpdateTalentStatusRequest {
   status: string;
 }
 
 //
-// GET USER PARAMS
+// GET TALENTS PARAMS
 //
-export interface GetUsersParams {
+export interface GetTalentsParams {
   page?: string;
   limit?: string;
   search?: string;
-  role?: string;
   status?: string;
 }

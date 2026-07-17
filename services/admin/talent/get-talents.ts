@@ -2,11 +2,11 @@ import { API_ENDPOINTS } from "@/lib/endpoints";
 
 import { fetchWithAuth } from "@/lib/fetchWithAuth";
 
-import { GetUsersParams, GetUsersResponse } from "@/types/admin/user";
+import { GetTalentsParams, GetTalentsResponse } from "@/types/admin/talent";
 
-export async function getUsers(
-  params: GetUsersParams,
-): Promise<GetUsersResponse> {
+export async function getTalents(
+  params: GetTalentsParams,
+): Promise<GetTalentsResponse> {
   const query = new URLSearchParams();
 
   Object.entries(params).forEach(([key, value]) => {
@@ -17,8 +17,8 @@ export async function getUsers(
 
   const endpoint =
     query.size > 0
-      ? `${API_ENDPOINTS.admin.user.users}?${query.toString()}`
-      : API_ENDPOINTS.admin.user.users;
+      ? `${API_ENDPOINTS.admin.talent.root}?${query.toString()}`
+      : API_ENDPOINTS.admin.talent.root;
 
   return fetchWithAuth(endpoint);
 }

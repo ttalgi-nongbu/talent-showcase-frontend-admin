@@ -73,12 +73,14 @@ export const API_ENDPOINTS = {
     },
 
     //
-    // USER
+    // TALENT
     //
-    user: {
-      users: `${API_URL}/admin/users`,
-      user: `${API_URL}/admin/users`,
-      updateUserStatus: `${API_URL}/admin/users`,
+    talent: {
+      root: `${API_URL}/admin/talents`,
+
+      detail: (id: number) => `${API_URL}/admin/talents/${id}`,
+
+      updateStatus: (id: number) => `${API_URL}/admin/talents/${id}/status`,
     },
   },
 };

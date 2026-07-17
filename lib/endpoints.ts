@@ -71,5 +71,14 @@ export const API_ENDPOINTS = {
         engagementChart: `${API_URL}/admin/dashboard/engagement-chart`,
       },
     },
+
+    //
+    // USER
+    //
+    user: {
+      users: `${API_URL}/admin/users`,
+      user: `${API_URL}/admin/users`,
+      updateUserStatus: `${API_URL}/admin/users`,
+    },
   },
 };

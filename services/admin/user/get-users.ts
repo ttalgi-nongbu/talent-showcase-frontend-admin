@@ -2,18 +2,23 @@ import { API_ENDPOINTS } from "@/lib/endpoints";
 
 import { fetchWithAuth } from "@/lib/fetchWithAuth";
 
-import { GetUsersResponse } from "@/types/admin/user";
+import { GetUsersParams, GetUsersResponse } from "@/types/admin/user";
 
 export async function getUsers(
-  page: number,
-  limit: number,
+  params: GetUsersParams,
 ): Promise<GetUsersResponse> {
-  const params = new URLSearchParams({
-    page: page.toString(),
-    limit: limit.toString(),
+  const query = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value !== undefined && value !== "") {
+      query.set(key, value);
+    }
   });
 
-  return fetchWithAuth(
-    `${API_ENDPOINTS.admin.user.users}?${params.toString()}`,
-  );
+  const endpoint =
+    query.size > 0
+      ? `${API_ENDPOINTS.admin.user.users}?${query.toString()}`
+      : API_ENDPOINTS.admin.user.users;
+
+  return fetchWithAuth(endpoint);
 }

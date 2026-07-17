@@ -6,10 +6,11 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getUsers } from "@/services/admin/user/get-users";
 
-export function useGetUsers(page: number, limit: number) {
-  const { data, error, isLoading, mutate } = useSWR(
-    ["users", page, limit],
-    () => getUsers(page, limit),
+import { GetUsersParams } from "@/types/admin/user";
+
+export function useGetUsers(params: GetUsersParams) {
+  const { data, error, isLoading, mutate } = useSWR(["users", params], () =>
+    getUsers(params),
   );
 
   return {

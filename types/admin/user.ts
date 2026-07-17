@@ -72,3 +72,14 @@ export interface GetUserResponse {
 export interface UpdateUserStatusRequest {
   status: string;
 }
+
+//
+// GET USER PARAMS
+//
+export interface GetUsersParams {
+  page?: string;
+  limit?: string;
+  search?: string;
+  role?: string;
+  status?: string;
+}

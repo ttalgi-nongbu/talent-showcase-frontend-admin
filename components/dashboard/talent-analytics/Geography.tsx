@@ -173,6 +173,8 @@ export default function Geography() {
                   fill="#f43f5e"
                   radius={[0, 8, 8, 0]}
                   maxBarSize={22}
+                  isAnimationActive
+                  animationBegin={0}
                   animationDuration={900}
                   animationEasing="ease-out"
                 />
@@ -268,6 +270,8 @@ export default function Geography() {
                   fill="#3b82f6"
                   radius={[0, 8, 8, 0]}
                   maxBarSize={22}
+                  isAnimationActive
+                  animationBegin={0}
                   animationDuration={900}
                   animationEasing="ease-out"
                 />
@@ -363,6 +367,8 @@ export default function Geography() {
                   fill="#10b981"
                   radius={[0, 8, 8, 0]}
                   maxBarSize={22}
+                  isAnimationActive
+                  animationBegin={0}
                   animationDuration={900}
                   animationEasing="ease-out"
                 />

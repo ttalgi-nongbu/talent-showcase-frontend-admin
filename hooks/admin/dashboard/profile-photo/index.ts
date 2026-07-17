@@ -1,7 +1,7 @@
-export * from "./useDraftProfilePhotos";
+export * from "./useGetDraftProfilePhotos";
 
-export * from "./usePublishedProfilePhotos";
+export * from "./useGetPublishedProfilePhotos";
 
-export * from "./useProfilePhotoStatistics";
+export * from "./useGetProfilePhotoStatistics";
 
-export * from "./useProfilePhotoChart";
+export * from "./useGetProfilePhotoChart";

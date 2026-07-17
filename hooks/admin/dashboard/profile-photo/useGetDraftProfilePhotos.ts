@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getDraftProfilePhotos } from "@/services/admin/dashboard/profile-photo/draft-profile-photos";
 
-export function useDraftProfilePhotos() {
+export function useGetDraftProfilePhotos() {
   const { data, error, isLoading, mutate } = useSWR(
     "draft-profile-photos",
     getDraftProfilePhotos,

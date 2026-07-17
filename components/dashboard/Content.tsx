@@ -2,6 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
+import PhotoAnalytics from "./photo-analytics/PhotoAnalytics";
 import ShowcaseAnalytics from "./showcase-analytics/ShowcaseAnalytics";
 import TalentAnalytics from "./talent-analytics/TalentAnalytics";
 
@@ -26,6 +27,14 @@ export default function Content() {
     const params = new URLSearchParams(searchParams.toString());
 
     params.set("tab", "showcase");
+
+    router.replace(`${pathname}?${params.toString()}`);
+  }
+
+  function goToPhoto() {
+    const params = new URLSearchParams(searchParams.toString());
+
+    params.set("tab", "photo");
 
     router.replace(`${pathname}?${params.toString()}`);
   }
@@ -63,7 +72,7 @@ export default function Content() {
             font-medium
             transition-colors
             ${
-              tab !== "showcase"
+              tab !== "showcase" && tab !== "photo"
                 ? "border-black text-black"
                 : "border-transparent text-gray-500 hover:text-black"
             }
@@ -90,11 +99,36 @@ export default function Content() {
         >
           Showcase Analytics
         </button>
+
+        <button
+          onClick={goToPhoto}
+          className={`
+            cursor-pointer
+            border-b-2
+            pb-3
+            text-sm
+            font-medium
+            transition-colors
+            ${
+              tab === "photo"
+                ? "border-black text-black"
+                : "border-transparent text-gray-500 hover:text-black"
+            }
+          `}
+        >
+          Photo Analytics
+        </button>
       </div>
 
       {/* CONTENT */}
       <div className="mt-6">
-        {tab === "showcase" ? <ShowcaseAnalytics /> : <TalentAnalytics />}
+        {tab === "showcase" ? (
+          <ShowcaseAnalytics />
+        ) : tab === "photo" ? (
+          <PhotoAnalytics />
+        ) : (
+          <TalentAnalytics />
+        )}
       </div>
     </>
   );

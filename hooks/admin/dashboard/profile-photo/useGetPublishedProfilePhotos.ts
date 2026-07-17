@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getPublishedProfilePhotos } from "@/services/admin/dashboard/profile-photo/published-profile-photos";
 
-export function usePublishedProfilePhotos() {
+export function useGetPublishedProfilePhotos() {
   const { data, error, isLoading, mutate } = useSWR(
     "published-profile-photos",
     getPublishedProfilePhotos,

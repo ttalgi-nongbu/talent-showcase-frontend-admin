@@ -6,7 +6,7 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getProfilePhotoChart } from "@/services/admin/dashboard/profile-photo/profile-photo-chart";
 
-export function useProfilePhotoChart() {
+export function useGetProfilePhotoChart() {
   const { data, error, isLoading, mutate } = useSWR(
     "profile-photo-chart",
     getProfilePhotoChart,

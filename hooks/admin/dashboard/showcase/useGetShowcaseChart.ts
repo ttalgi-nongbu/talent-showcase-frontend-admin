@@ -6,10 +6,10 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getShowcaseChart } from "@/services/admin/dashboard/showcase/showcase-chart";
 
-export function useGetShowcaseChart() {
+export function useGetShowcaseChart(period: "week" | "month" | "year") {
   const { data, error, isLoading, mutate } = useSWR(
-    "showcase-chart",
-    getShowcaseChart,
+    ["showcase-chart", period],
+    () => getShowcaseChart(period),
   );
 
   return {

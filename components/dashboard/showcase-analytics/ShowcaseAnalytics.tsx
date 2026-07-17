@@ -2,6 +2,7 @@
 
 import OverviewCards from "./OverviewCards";
 import ShowcaseChart from "./ShowcaseChart";
+import ShowcaseDistribution from "./ShowcaseDistribution";
 import ShowcaseStatistics from "./ShowcaseStatistics";
 
 export default function TalentAnalytics() {
@@ -9,11 +10,15 @@ export default function TalentAnalytics() {
     <>
       {/* OVERVIEW */}
       <OverviewCards />
+
       {/* SHOWCASE CHART */}
       <ShowcaseChart />
 
       {/* SHOWCASE STATISTICS */}
       <ShowcaseStatistics />
+
+      {/* SHOWCASE DISTRIBUTION */}
+      <ShowcaseDistribution />
     </>
   );
 }

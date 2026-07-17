@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 
 import {
   Squares2X2Icon,
+  UsersIcon,
   EllipsisHorizontalIcon,
   ArrowLeftStartOnRectangleIcon,
   ArrowRightEndOnRectangleIcon,
@@ -60,6 +61,11 @@ export default function Sidebar() {
       name: "Dashboard",
       href: "/",
       icon: Squares2X2Icon,
+    },
+    {
+      name: "User Management",
+      href: "/users",
+      icon: UsersIcon,
     },
   ];
 

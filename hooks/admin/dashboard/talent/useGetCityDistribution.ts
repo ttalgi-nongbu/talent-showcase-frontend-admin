@@ -6,10 +6,10 @@ import { getErrorMessage } from "@/lib/error";
 
 import { getCityDistribution } from "@/services/admin/dashboard/talent/city-distribution";
 
-export function useGetCityDistribution() {
+export function useGetCityDistribution(limit: number) {
   const { data, error, isLoading, mutate } = useSWR(
-    "city-distribution",
-    getCityDistribution,
+    ["city-distribution", limit],
+    () => getCityDistribution(limit),
   );
 
   return {

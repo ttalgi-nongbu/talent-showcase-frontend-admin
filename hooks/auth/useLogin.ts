@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { mutate } from "swr";
+
 import { showErrorAlert } from "@/lib/alert";
 import { getErrorMessage } from "@/lib/error";
 
@@ -40,6 +42,8 @@ export function useLogin() {
       }
 
       localStorage.setItem("access_token", response.data.access_token);
+
+      await mutate("account");
 
       router.push("/");
     } catch (err: unknown) {

@@ -4,6 +4,8 @@ import { useState } from "react";
 
 import { useRouter } from "next/navigation";
 
+import { mutate } from "swr";
+
 import { showErrorAlert } from "@/lib/alert";
 import { getErrorMessage } from "@/lib/error";
 
@@ -21,6 +23,8 @@ export function useLogout() {
       await logout();
 
       localStorage.removeItem("access_token");
+
+      await mutate("account", null, false);
 
       router.push("/login");
     } catch (err: unknown) {

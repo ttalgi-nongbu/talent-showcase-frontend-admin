@@ -28,10 +28,17 @@ export function useLogout() {
 
       router.push("/login");
     } catch (err: unknown) {
-      await showErrorAlert(
-        getErrorMessage(err, "Failed to logout"),
-        "Logout Failed",
-      );
+      const message = getErrorMessage(err, "Failed to logout");
+
+      await showErrorAlert(message, "Logout Failed");
+
+      if (message === "Session expired") {
+        localStorage.removeItem("access_token");
+
+        await mutate("account", null, false);
+
+        return;
+      }
     } finally {
       setLoading(false);
     }

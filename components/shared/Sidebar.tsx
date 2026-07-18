@@ -2,29 +2,36 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import { usePathname } from "next/navigation";
 
 import {
-  Squares2X2Icon,
+  HomeIcon,
   UsersIcon,
   EllipsisHorizontalIcon,
   ArrowLeftStartOnRectangleIcon,
-  ArrowRightEndOnRectangleIcon,
+  XMarkIcon,
   Cog6ToothIcon,
+  ArrowRightEndOnRectangleIcon,
 } from "@heroicons/react/24/outline";
 
 import { useAccount } from "@/contexts/AccountContext";
+
 import { useLogout } from "@/hooks/auth";
 
 export default function Sidebar() {
   const pathname = usePathname();
 
+  const [expanded, setExpanded] = useState(false);
+
   const [showMoreMenu, setShowMoreMenu] = useState(false);
 
   const moreMenuRef = useRef<HTMLDivElement>(null);
 
+  //
+  // ambil account
+  //
   const { account } = useAccount();
 
   useEffect(() => {
@@ -44,6 +51,30 @@ export default function Sidebar() {
     };
   }, []);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!event.ctrlKey || event.code !== "KeyB") {
+        return;
+      }
+
+      event.preventDefault();
+
+      setExpanded((prev) => {
+        if (prev) {
+          setShowMoreMenu(false);
+        }
+
+        return !prev;
+      });
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   const {
     loading: logoutLoading,
     actions: { handleLogout },
@@ -53,7 +84,7 @@ export default function Sidebar() {
     {
       name: "Dashboard",
       href: "/",
-      icon: Squares2X2Icon,
+      icon: HomeIcon,
     },
     {
       name: "Talent Management",
@@ -64,19 +95,23 @@ export default function Sidebar() {
 
   return (
     <aside
-      className="
-        w-64
+      className={`
+        ${expanded ? "w-64" : "w-20"}
         h-screen
-        shrink-0
+        bg-white
         border-r
         border-gray-200
-        bg-white
-      "
+        shrink-0
+        overflow-hidden
+        transition-[width]
+        duration-300
+        ease-in-out
+      `}
     >
       <div
         className="
-          flex
           h-full
+          flex
           flex-col
           py-4
         "
@@ -84,27 +119,85 @@ export default function Sidebar() {
         {/* LOGO */}
         <div
           className="
+            mt-1
             mb-6
-            px-6
+            px-4
+            flex
+            items-center
           "
         >
-          <Image
-            src="/logo.png"
-            alt="Starion"
-            width={877}
-            height={25}
-            className="h-auto w-36 object-contain"
-          />
+          <button
+            onClick={() => {
+              setExpanded(!expanded);
+
+              if (expanded) {
+                setShowMoreMenu(false);
+              }
+            }}
+            className={`
+    h-10
+    shrink-0
+    cursor-pointer
+    flex
+    items-center
+    transition-all
+    duration-300
+    ${expanded ? "w-36" : "w-10"}
+  `}
+          >
+            <Image
+              src={expanded ? "/logo.png" : "/logo-mark.png"}
+              alt="Starion"
+              width={877}
+              height={25}
+              className={`
+      object-contain
+      transition-all
+      duration-300
+      ${expanded ? "w-36 h-auto" : "w-10 h-10"}
+    `}
+            />
+          </button>
+
+          <div
+            className={`
+              ml-auto
+              transition-opacity
+              duration-200
+              ${expanded ? "opacity-100" : "opacity-0 pointer-events-none"}
+            `}
+          >
+            <button
+              onClick={() => {
+                setExpanded(false);
+                setShowMoreMenu(false);
+              }}
+              className="
+                p-2
+                rounded-xl
+                text-gray-500
+                hover:bg-gray-100
+                cursor-pointer
+              "
+            >
+              <XMarkIcon
+                className="
+                  w-5
+                  h-5
+                "
+              />
+            </button>
+          </div>
         </div>
 
         {/* MENU */}
         <nav
           className="
-            flex
-            flex-col
-            gap-2
-            px-3
-          "
+    flex
+    flex-col
+    gap-2
+    px-3
+  "
         >
           {menu.map((item) => {
             const Icon = item.icon;
@@ -119,22 +212,38 @@ export default function Sidebar() {
                 key={item.href}
                 href={item.href}
                 className={`
-                  flex
-                  h-12
-                  items-center
-                  rounded-xl
-                  px-4
-                  transition
-                  ${
-                    isActive
-                      ? "bg-rose-100 text-rose-500"
-                      : "text-gray-500 hover:bg-gray-100"
-                  }
-                `}
+          flex
+          items-center
+          h-12
+          rounded-xl
+          px-4
+          overflow-hidden
+          ${
+            isActive
+              ? "bg-rose-100 text-rose-500"
+              : "text-gray-500 hover:bg-gray-100"
+          }
+        `}
               >
-                <Icon className="h-6 w-6 shrink-0" />
+                <Icon
+                  className="
+            w-6
+            h-6
+            shrink-0
+          "
+                />
 
-                <span className="ml-3">{item.name}</span>
+                <span
+                  className={`
+            whitespace-nowrap
+            overflow-hidden
+            transition-all
+            duration-200
+            ${expanded ? "w-auto opacity-100 ml-3" : "w-0 opacity-0 ml-0"}
+          `}
+                >
+                  {item.name}
+                </span>
               </Link>
             );
           })}
@@ -144,37 +253,54 @@ export default function Sidebar() {
           <div
             ref={moreMenuRef}
             className="
-              relative
-              mt-auto
-              px-3
-            "
+      mt-auto
+      px-3
+      relative
+    "
           >
             {showMoreMenu && (
               <div
                 className="
-                  mb-2
-                  overflow-hidden
-                  rounded-xl
-                  border
-                  border-gray-200
-                  bg-white
-                  shadow-sm
-                "
+          mb-2
+          overflow-hidden
+           rounded-xl
+          border
+          border-gray-200
+          bg-white
+          shadow-sm
+        "
               >
                 <Link
                   href="/settings/account"
                   className="
-                    flex
-                    h-12
-                    items-center
-                    px-4
-                    text-gray-500
-                    hover:bg-gray-100
-                  "
+            flex
+            items-center
+            w-full
+            h-12
+            px-4
+            text-gray-500
+            hover:bg-gray-100
+          "
                 >
-                  <Cog6ToothIcon className="h-6 w-6 shrink-0" />
+                  <Cog6ToothIcon
+                    className="
+              w-6
+              h-6
+              shrink-0
+            "
+                  />
 
-                  <span className="ml-3">Settings</span>
+                  <span
+                    className={`
+              whitespace-nowrap
+              overflow-hidden
+              transition-all
+              duration-200
+              ${expanded ? "w-auto opacity-100 ml-3" : "w-0 opacity-0 ml-0"}
+            `}
+                  >
+                    Settings
+                  </span>
                 </Link>
 
                 <button
@@ -182,19 +308,33 @@ export default function Sidebar() {
                   onClick={handleLogout}
                   disabled={logoutLoading}
                   className="
-                    flex
-                    h-12
-                    w-full
-                    cursor-pointer
-                    items-center
-                    px-4
-                    text-gray-500
-                    hover:bg-gray-100
-                  "
+            flex
+            items-center
+            w-full
+            h-12
+            px-4
+            text-gray-500
+            hover:bg-gray-100
+            cursor-pointer
+          "
                 >
-                  <ArrowLeftStartOnRectangleIcon className="h-6 w-6 shrink-0" />
+                  <ArrowLeftStartOnRectangleIcon
+                    className="
+              w-6
+              h-6
+              shrink-0
+            "
+                  />
 
-                  <span className="ml-3">
+                  <span
+                    className={`
+              whitespace-nowrap
+              overflow-hidden
+              transition-all
+              duration-200
+              ${expanded ? "w-auto opacity-100 ml-3" : "w-0 opacity-0 ml-0"}
+            `}
+                  >
                     {logoutLoading ? "Logging out..." : "Logout"}
                   </span>
                 </button>
@@ -205,47 +345,85 @@ export default function Sidebar() {
               type="button"
               onClick={() => setShowMoreMenu(!showMoreMenu)}
               className="
-                flex
-                h-12
-                w-full
-                cursor-pointer
-                items-center
-                rounded-xl
-                px-4
-                text-gray-500
-                hover:bg-gray-100
-              "
+        flex
+        items-center
+        h-12
+        w-full
+         rounded-xl
+        px-4
+        overflow-hidden
+        text-gray-500
+        hover:bg-gray-100
+        cursor-pointer
+      "
             >
-              <EllipsisHorizontalIcon className="h-6 w-6 shrink-0" />
+              <EllipsisHorizontalIcon
+                className="
+          w-6
+          h-6
+          shrink-0
+        "
+              />
 
-              <span className="ml-3">More</span>
+              <span
+                className={`
+          whitespace-nowrap
+          overflow-hidden
+          transition-all
+          duration-200
+          ${expanded ? "w-auto opacity-100 ml-3" : "w-0 opacity-0 ml-0"}
+        `}
+              >
+                More
+              </span>
             </button>
           </div>
         ) : (
           <div
             className="
-              mt-auto
-              px-3
-            "
+    mt-auto
+    px-3
+  "
           >
             <Link
               href="/login"
-              className="
-                animate-login-bounce
-                flex
-                h-12
-                items-center
-                justify-center
-                rounded-xl
-                bg-rose-500
-                font-bold
-                text-white
-                transition
-                hover:bg-rose-600
-              "
+              className={`
+    animate-login-bounce
+    flex
+    h-12
+    items-center
+    justify-center
+    rounded-xl
+    bg-rose-500
+    text-white
+    transition
+    hover:bg-rose-600
+    ${expanded ? "w-full" : "w-12"}
+  `}
             >
-              <ArrowRightEndOnRectangleIcon className="mr-2 h-6 w-6" />
-              Login
+              <ArrowRightEndOnRectangleIcon
+                className={`
+      h-6
+      w-6
+      shrink-0
+      transition-all
+      duration-200
+      ${expanded ? "mr-2" : ""}
+    `}
+              />
+
+              <span
+                className={`
+      whitespace-nowrap
+      overflow-hidden
+      font-bold
+      transition-all
+      duration-200
+      ${expanded ? "w-auto opacity-100" : "w-0 opacity-0"}
+    `}
+              >
+                Login
+              </span>
             </Link>
           </div>
         )}

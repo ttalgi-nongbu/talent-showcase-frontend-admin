@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import Link from "next/link";
+
 import { ArrowPathIcon } from "@heroicons/react/24/outline";
 
 import { formatDateTime } from "@/lib/time";
@@ -436,8 +438,10 @@ export default function Content() {
                         text-right
                       "
                     >
-                      <button
+                      <Link
+                        href={`/talents/${talent.id}`}
                         className="
+                          inline-flex
                           cursor-pointer
                           rounded-lg
                           border
@@ -452,7 +456,7 @@ export default function Content() {
                         "
                       >
                         View
-                      </button>
+                      </Link>
                     </td>
                   </tr>
                 ))

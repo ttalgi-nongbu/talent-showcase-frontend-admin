@@ -21,21 +21,21 @@ import Pagination from "@/components/common/Pagination";
 export default function Content() {
   const [page, setPage] = useState(1);
 
-  const [search, setSearch] = useState("");
+  const [keyword, setKeyword] = useState("");
 
-  const [debouncedSearch, setDebouncedSearch] = useState("");
+  const [debouncedKeyword, setDebouncedKeyword] = useState("");
 
   const [status, setStatus] = useState("");
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setDebouncedSearch(search);
+      setDebouncedKeyword(keyword);
 
       setPage(1);
     }, 500);
 
     return () => clearTimeout(timeout);
-  }, [search]);
+  }, [keyword]);
 
   const {
     talents,
@@ -47,7 +47,7 @@ export default function Content() {
   } = useGetTalents({
     page: page.toString(),
     limit: "10",
-    search: debouncedSearch,
+    q: debouncedKeyword,
     status,
   });
 
@@ -110,8 +110,8 @@ export default function Content() {
       >
         <input
           type="text"
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
           placeholder="Search by username or email..."
           className="
       flex-1
@@ -346,7 +346,7 @@ export default function Content() {
           text-gray-500
         "
                     >
-                      {debouncedSearch
+                      {debouncedKeyword
                         ? "No talents match your search."
                         : status
                           ? "No talents found with the selected status."

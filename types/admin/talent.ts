@@ -113,7 +113,7 @@ export interface GetTalentsParams {
 
   limit?: string;
 
-  search?: string;
+  q?: string;
 
   status?: string;
 }

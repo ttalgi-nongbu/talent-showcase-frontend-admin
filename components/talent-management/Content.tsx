@@ -17,6 +17,8 @@ export default function Content() {
 
   const [debouncedSearch, setDebouncedSearch] = useState("");
 
+  const [status, setStatus] = useState("");
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       setDebouncedSearch(search);
@@ -31,6 +33,7 @@ export default function Content() {
     page: page.toString(),
     limit: "10",
     search: debouncedSearch,
+    status,
   });
 
   return (
@@ -64,6 +67,10 @@ export default function Content() {
       <div
         className="
     mt-6
+    flex
+    flex-col
+    gap-4
+    md:flex-row
   "
       >
         <input
@@ -72,7 +79,7 @@ export default function Content() {
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search by username or email..."
           className="
-      w-full
+      flex-1
       rounded-xl
       border
       border-gray-300
@@ -83,6 +90,29 @@ export default function Content() {
       focus:border-rose-500
     "
         />
+
+        <select
+          value={status}
+          onChange={(e) => {
+            setStatus(e.target.value);
+
+            setPage(1);
+          }}
+          className="
+      rounded-xl
+      border
+      border-gray-300
+      px-4
+      py-3
+      outline-none
+      transition-colors
+      focus:border-rose-500
+    "
+        >
+          <option value="">All Status</option>
+          <option value="active">Active</option>
+          <option value="banned">Banned</option>
+        </select>
       </div>
 
       <div
@@ -246,7 +276,9 @@ export default function Content() {
                     >
                       {debouncedSearch
                         ? "No talents match your search."
-                        : "There are no registered talents yet."}
+                        : status
+                          ? "No talents found with the selected status."
+                          : "There are no registered talents yet."}
                     </p>
                   </td>
                 </tr>

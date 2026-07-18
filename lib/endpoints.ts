@@ -80,7 +80,9 @@ export const API_ENDPOINTS = {
 
       detail: (id: number) => `${API_URL}/admin/talents/${id}`,
 
-      updateStatus: (id: number) => `${API_URL}/admin/talents/${id}/status`,
+      ban: (id: number) => `${API_URL}/admin/talents/${id}/ban`,
+
+      activate: (id: number) => `${API_URL}/admin/talents/${id}/activate`,
     },
   },
 };

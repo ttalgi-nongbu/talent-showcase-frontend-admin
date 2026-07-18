@@ -2,4 +2,6 @@ export * from "./useGetTalents";
 
 export * from "./useGetTalent";
 
-export * from "./useUpdateTalentStatus";
+export * from "./useBanTalent";
+
+export * from "./useActivateTalent";

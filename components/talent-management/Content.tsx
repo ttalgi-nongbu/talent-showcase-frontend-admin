@@ -357,7 +357,7 @@ export default function Content() {
               ) : (
                 talents.map((talent) => (
                   <tr
-                    key={talent.id}
+                    key={talent.user.id}
                     className="
                       border-b
                       border-gray-100
@@ -473,7 +473,7 @@ export default function Content() {
                           type="button"
                           disabled={banning || activating}
                           onClick={() =>
-                            handleStatus(talent.id, talent.user.status)
+                            handleStatus(talent.user.id, talent.user.status)
                           }
                           className={`
                             cursor-pointer
@@ -496,7 +496,7 @@ export default function Content() {
                         </button>
 
                         <Link
-                          href={`/talents/${talent.id}`}
+                          href={`/talents/${talent.user.id}`}
                           className="
         inline-flex
         items-center

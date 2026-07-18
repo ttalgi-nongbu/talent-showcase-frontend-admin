@@ -95,8 +95,8 @@ export default function Content() {
           text-gray-500
         "
       >
-        Manage registered talents, view account information, and update account
-        status.
+        Browse registered talents, view account information, and manage account
+        access.
       </p>
 
       <div

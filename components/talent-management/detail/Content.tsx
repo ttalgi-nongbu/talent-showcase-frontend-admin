@@ -119,15 +119,15 @@ export default function Content() {
 
       <div
         className="
-          mt-8
-          space-y-6
-        "
+    mt-8
+    space-y-6
+  "
       >
         <AccountInformation user={talent.user} />
 
-        <ProfileInformation profile={talent.profile} />
+        {talent.profile && <ProfileInformation profile={talent.profile} />}
 
-        <Statistics statistics={talent.statistics} />
+        {talent.statistics && <Statistics statistics={talent.statistics} />}
       </div>
     </section>
   );

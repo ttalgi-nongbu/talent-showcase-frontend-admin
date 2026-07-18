@@ -8,7 +8,7 @@ import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import { useGetTalent } from "@/hooks/admin/talent/useGetTalent";
 
 import AccountInformation from "./sections/AccountInformation";
-import ProfileInformation from "./sections/ProfileInformation";
+import ProfileDetails from "./sections/ProfileDetails";
 import Statistics from "./sections/Statistics";
 
 export default function Content() {
@@ -126,7 +126,7 @@ export default function Content() {
         <AccountInformation user={talent.user} />
 
         {talent.profile ? (
-          <ProfileInformation profile={talent.profile} />
+          <ProfileDetails profile={talent.profile} />
         ) : (
           <section
             className="
@@ -143,7 +143,7 @@ export default function Content() {
           text-gray-800
         "
             >
-              Profile Information
+              Profile Details
             </h2>
 
             <p

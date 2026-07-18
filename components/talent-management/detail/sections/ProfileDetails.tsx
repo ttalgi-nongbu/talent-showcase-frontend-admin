@@ -8,7 +8,7 @@ interface Props {
   profile: Profile;
 }
 
-export default function ProfileInformation({ profile }: Props) {
+export default function ProfileDetails({ profile }: Props) {
   return (
     <section
       className="
@@ -25,7 +25,7 @@ export default function ProfileInformation({ profile }: Props) {
           text-gray-800
         "
       >
-        Profile Information
+        Profile Details
       </h2>
 
       <div

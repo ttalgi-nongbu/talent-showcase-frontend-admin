@@ -247,7 +247,7 @@ export default function Content() {
                     text-gray-700
                   "
                 >
-                  Email
+                  Email Verified
                 </th>
 
                 <th

@@ -232,7 +232,7 @@ export default function Content() {
                           text-gray-900
                         "
                       >
-                        @{talent.username}
+                        @{talent.user.username}
                       </span>
                     </td>
 
@@ -243,7 +243,7 @@ export default function Content() {
                         text-gray-700
                       "
                     >
-                      {talent.email}
+                      {talent.user.email}
                     </td>
 
                     <td
@@ -262,13 +262,13 @@ export default function Content() {
                           text-xs
                           font-medium
                           ${
-                            talent.email_verified
+                            talent.user.email_verified
                               ? "bg-green-100 text-green-700"
                               : "bg-yellow-100 text-yellow-700"
                           }
                         `}
                       >
-                        {talent.email_verified ? "Verified" : "Pending"}
+                        {talent.user.email_verified ? "Verified" : "Pending"}
                       </span>
                     </td>
 
@@ -288,13 +288,13 @@ export default function Content() {
                           text-xs
                           font-medium
                           ${
-                            talent.status === "active"
+                            talent.user.status === "active"
                               ? "bg-green-100 text-green-700"
                               : "bg-red-100 text-red-700"
                           }
                         `}
                       >
-                        {capitalize(talent.status)}
+                        {capitalize(talent.user.status)}
                       </span>
                     </td>
 
@@ -307,7 +307,7 @@ export default function Content() {
                         text-gray-500
                       "
                     >
-                      {formatDateTime(talent.registration_at)}
+                      {formatDateTime(talent.user.registration_at)}
                     </td>
 
                     <td

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { formatDateTime } from "@/lib/time";
 
@@ -13,9 +13,24 @@ import Pagination from "@/components/common/Pagination";
 export default function Content() {
   const [page, setPage] = useState(1);
 
+  const [search, setSearch] = useState("");
+
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setDebouncedSearch(search);
+
+      setPage(1);
+    }, 500);
+
+    return () => clearTimeout(timeout);
+  }, [search]);
+
   const { talents, pagination, loading, error } = useGetTalents({
     page: page.toString(),
     limit: "10",
+    search: debouncedSearch,
   });
 
   return (
@@ -45,6 +60,30 @@ export default function Content() {
         Manage registered talents, view account information, and update account
         status.
       </p>
+
+      <div
+        className="
+    mt-6
+  "
+      >
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by username or email..."
+          className="
+      w-full
+      rounded-xl
+      border
+      border-gray-300
+      px-4
+      py-3
+      outline-none
+      transition-colors
+      focus:border-rose-500
+    "
+        />
+      </div>
 
       <div
         className="
@@ -184,28 +223,30 @@ export default function Content() {
                   <td
                     colSpan={6}
                     className="
-                      py-20
-                      text-center
-                    "
+        py-20
+        text-center
+      "
                   >
                     <h2
                       className="
-                        text-lg
-                        font-semibold
-                        text-gray-700
-                      "
+          text-lg
+          font-semibold
+          text-gray-700
+        "
                     >
                       No talents found
                     </h2>
 
                     <p
                       className="
-                        mt-2
-                        text-sm
-                        text-gray-500
-                      "
+          mt-2
+          text-sm
+          text-gray-500
+        "
                     >
-                      There are no registered talents yet.
+                      {debouncedSearch
+                        ? "No talents match your search."
+                        : "There are no registered talents yet."}
                     </p>
                   </td>
                 </tr>

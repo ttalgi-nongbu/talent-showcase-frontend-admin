@@ -5,7 +5,7 @@ export interface User {
   username: string;
   email: string;
   email_verified: boolean;
-  status: string;
+  status: "active" | "banned";
   role: string;
   registration_at: string;
 }
@@ -86,13 +86,6 @@ export interface GetTalentResponse {
   message: string;
 
   success: boolean;
-}
-
-//
-// UPDATE TALENT STATUS
-//
-export interface UpdateTalentStatusRequest {
-  status: string;
 }
 
 //

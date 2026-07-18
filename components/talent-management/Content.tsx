@@ -12,6 +12,10 @@ import { capitalize } from "@/lib/string";
 
 import { useGetTalents } from "@/hooks/admin/talent/useGetTalents";
 
+import { useBanTalent } from "@/hooks/admin/talent/useBanTalent";
+
+import { useActivateTalent } from "@/hooks/admin/talent/useActivateTalent";
+
 import Pagination from "@/components/common/Pagination";
 
 export default function Content() {
@@ -46,6 +50,26 @@ export default function Content() {
     search: debouncedSearch,
     status,
   });
+
+  const {
+    loading: banning,
+
+    action: ban,
+  } = useBanTalent();
+
+  const {
+    loading: activating,
+
+    action: activate,
+  } = useActivateTalent();
+
+  const handleStatus = async (id: number, status: "active" | "banned") => {
+    const success = status === "active" ? await ban(id) : await activate(id);
+
+    if (success) {
+      refresh();
+    }
+  };
 
   return (
     <section
@@ -433,30 +457,64 @@ export default function Content() {
 
                     <td
                       className="
-                        px-6
-                        py-4
-                        text-right
-                      "
+    px-6
+    py-4
+    text-right
+  "
                     >
-                      <Link
-                        href={`/talents/${talent.id}`}
+                      <div
                         className="
-                          inline-flex
-                          cursor-pointer
-                          rounded-lg
-                          border
-                          border-gray-300
-                          px-4
-                          py-2
-                          text-sm
-                          font-medium
-                          text-gray-700
-                          transition-colors
-                          hover:bg-gray-100
-                        "
+      flex
+      justify-end
+      gap-2
+    "
                       >
-                        View
-                      </Link>
+                        <button
+                          type="button"
+                          disabled={banning || activating}
+                          onClick={() =>
+                            handleStatus(talent.id, talent.user.status)
+                          }
+                          className={`
+                            cursor-pointer
+                            rounded-lg
+                            px-4
+                            py-2
+                            text-sm
+                            font-medium
+                            text-white
+                            transition-colors
+                            disabled:opacity-50
+                            ${
+                              talent.user.status === "active"
+                                ? "bg-red-500 hover:bg-red-600"
+                                : "bg-green-600 hover:bg-green-700"
+                            }
+                          `}
+                        >
+                          {talent.user.status === "active" ? "Ban" : "Activate"}
+                        </button>
+
+                        <Link
+                          href={`/talents/${talent.id}`}
+                          className="
+        inline-flex
+        items-center
+        rounded-lg
+        border
+        border-gray-300
+        px-4
+        py-2
+        text-sm
+        font-medium
+        text-gray-700
+        transition-colors
+        hover:bg-gray-100
+      "
+                        >
+                          View
+                        </Link>
+                      </div>
                     </td>
                   </tr>
                 ))

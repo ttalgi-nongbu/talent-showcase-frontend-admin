@@ -6,6 +6,8 @@ import { useGetTalent } from "@/hooks/admin/talent/useGetTalent";
 
 import AccountInformation from "./sections/AccountInformation";
 
+import ProfileInformation from "./sections/ProfileInformation";
+
 export default function Content() {
   const params = useParams();
 
@@ -85,10 +87,13 @@ export default function Content() {
 
       <div
         className="
-          mt-8
-        "
+    mt-8
+    space-y-6
+  "
       >
         <AccountInformation user={talent.user} />
+
+        <ProfileInformation profile={talent.profile} />
       </div>
     </section>
   );

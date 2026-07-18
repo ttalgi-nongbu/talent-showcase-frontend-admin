@@ -1,13 +1,44 @@
 //
-// TALENT
+// USER
 //
-export interface Talent {
-  id: number;
+export interface User {
   username: string;
   email: string;
   email_verified: boolean;
   status: string;
+  role: string;
   registration_at: string;
+}
+
+//
+// PROFILE
+//
+export interface Profile {
+  full_name: string;
+  gender: string;
+  nationality: string;
+  country: string;
+  city: string;
+  avatar_url: string | null;
+}
+
+//
+// STATISTICS
+//
+export interface Statistics {
+  showcases: number;
+  profile_photos: number;
+  followers: number;
+  following: number;
+}
+
+//
+// TALENT
+//
+export interface Talent {
+  id: number;
+
+  user: User;
 }
 
 //
@@ -37,40 +68,16 @@ export interface GetTalentsResponse {
 }
 
 //
-// TALENT PROFILE
-//
-export interface TalentProfile {
-  full_name: string;
-  gender: string;
-  nationality: string;
-  country: string;
-  city: string;
-}
-
-//
-// TALENT STATISTICS
-//
-export interface TalentStatistics {
-  showcases: number;
-  profile_photos: number;
-  followers: number;
-  following: number;
-}
-
-//
 // GET TALENT
 //
 export interface GetTalent {
   id: number;
-  username: string;
-  email: string;
-  email_verified: boolean;
-  status: string;
-  registration_at: string;
 
-  profile: TalentProfile;
+  user: User;
 
-  statistics: TalentStatistics;
+  profile: Profile | null;
+
+  statistics: Statistics | null;
 }
 
 export interface GetTalentResponse {

@@ -1,6 +1,61 @@
 "use client";
 
+import { useParams } from "next/navigation";
+
+import { useGetTalent } from "@/hooks/admin/talent/useGetTalent";
+
+import AccountInformation from "./sections/AccountInformation";
+
 export default function Content() {
+  const params = useParams();
+
+  const id = Number(params.id);
+
+  const { talent, loading, error } = useGetTalent(id);
+
+  if (loading) {
+    return (
+      <section
+        className="
+          rounded-2xl
+          bg-white
+          p-8
+        "
+      >
+        Loading talent...
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section
+        className="
+          rounded-2xl
+          bg-white
+          p-8
+          text-red-500
+        "
+      >
+        {error}
+      </section>
+    );
+  }
+
+  if (!talent) {
+    return (
+      <section
+        className="
+          rounded-2xl
+          bg-white
+          p-8
+        "
+      >
+        Talent not found.
+      </section>
+    );
+  }
+
   return (
     <section
       className="
@@ -25,8 +80,16 @@ export default function Content() {
           text-gray-500
         "
       >
-        Hello World
+        View talent account information, profile details, and statistics.
       </p>
+
+      <div
+        className="
+          mt-8
+        "
+      >
+        <AccountInformation user={talent.user} />
+      </div>
     </section>
   );
 }

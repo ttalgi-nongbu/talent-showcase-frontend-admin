@@ -8,6 +8,8 @@ import AccountInformation from "./sections/AccountInformation";
 
 import ProfileInformation from "./sections/ProfileInformation";
 
+import Statistics from "./sections/Statistics";
+
 export default function Content() {
   const params = useParams();
 
@@ -94,6 +96,8 @@ export default function Content() {
         <AccountInformation user={talent.user} />
 
         <ProfileInformation profile={talent.profile} />
+
+        <Statistics statistics={talent.statistics} />
       </div>
     </section>
   );

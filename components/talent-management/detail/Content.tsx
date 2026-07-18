@@ -125,7 +125,38 @@ export default function Content() {
       >
         <AccountInformation user={talent.user} />
 
-        {talent.profile && <ProfileInformation profile={talent.profile} />}
+        {talent.profile ? (
+          <ProfileInformation profile={talent.profile} />
+        ) : (
+          <section
+            className="
+        rounded-2xl
+        border
+        border-gray-200
+        p-6
+      "
+          >
+            <h2
+              className="
+          text-lg
+          font-semibold
+          text-gray-800
+        "
+            >
+              Profile Information
+            </h2>
+
+            <p
+              className="
+          mt-4
+          text-sm
+          text-gray-500
+        "
+            >
+              This talent has not created a profile yet.
+            </p>
+          </section>
+        )}
 
         {talent.statistics && <Statistics statistics={talent.statistics} />}
       </div>

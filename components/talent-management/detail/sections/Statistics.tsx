@@ -3,26 +3,26 @@
 import { Statistics as StatisticsType } from "@/types/admin/talent";
 
 interface Props {
-  statistics: StatisticsType | null;
+  statistics: StatisticsType;
 }
 
 export default function Statistics({ statistics }: Props) {
   const items = [
     {
       label: "Showcases",
-      value: statistics?.showcases ?? "—",
+      value: statistics.showcases,
     },
     {
       label: "Photos",
-      value: statistics?.profile_photos ?? "—",
+      value: statistics.profile_photos,
     },
     {
       label: "Followers",
-      value: statistics?.followers ?? "—",
+      value: statistics.followers,
     },
     {
       label: "Following",
-      value: statistics?.following ?? "—",
+      value: statistics.following,
     },
   ];
 

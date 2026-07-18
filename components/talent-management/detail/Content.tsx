@@ -1,13 +1,14 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
+
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 
 import { useGetTalent } from "@/hooks/admin/talent/useGetTalent";
 
 import AccountInformation from "./sections/AccountInformation";
-
 import ProfileInformation from "./sections/ProfileInformation";
-
 import Statistics from "./sections/Statistics";
 
 export default function Content() {
@@ -68,30 +69,59 @@ export default function Content() {
         p-8
       "
     >
-      <h1
+      <div
         className="
-          text-2xl
-          font-bold
-          text-gray-800
+          flex
+          items-center
+          gap-3
         "
       >
-        Talent Detail
-      </h1>
+        <Link
+          href="/talents"
+          className="
+            rounded-lg
+            p-2
+            text-gray-400
+            transition
+            hover:bg-gray-100
+            hover:text-gray-600
+          "
+        >
+          <ArrowLeftIcon
+            className="
+              h-5
+              w-5
+            "
+          />
+        </Link>
 
-      <p
-        className="
-          mt-2
-          text-gray-500
-        "
-      >
-        View talent account information, profile details, and statistics.
-      </p>
+        <div>
+          <h1
+            className="
+              text-2xl
+              font-bold
+              text-gray-800
+            "
+          >
+            Talent Detail
+          </h1>
+
+          <p
+            className="
+              mt-2
+              text-gray-500
+            "
+          >
+            View talent account information, profile details, and statistics.
+          </p>
+        </div>
+      </div>
 
       <div
         className="
-    mt-8
-    space-y-6
-  "
+          mt-8
+          space-y-6
+        "
       >
         <AccountInformation user={talent.user} />
 

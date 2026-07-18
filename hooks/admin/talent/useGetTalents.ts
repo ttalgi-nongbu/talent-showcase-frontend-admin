@@ -23,7 +23,7 @@ export function useGetTalents(params: GetTalentsParams) {
     error: error ? getErrorMessage(error, "Failed to get talents") : "",
 
     actions: {
-      refresh: mutate,
+      refresh: () => mutate(),
     },
   };
 }

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 
+import { ArrowPathIcon } from "@heroicons/react/24/outline";
+
 import { formatDateTime } from "@/lib/time";
 
 import { capitalize } from "@/lib/string";
@@ -29,7 +31,14 @@ export default function Content() {
     return () => clearTimeout(timeout);
   }, [search]);
 
-  const { talents, pagination, loading, error } = useGetTalents({
+  const {
+    talents,
+    pagination,
+    loading,
+    error,
+
+    actions: { refresh },
+  } = useGetTalents({
     page: page.toString(),
     limit: "10",
     search: debouncedSearch,
@@ -91,14 +100,20 @@ export default function Content() {
     "
         />
 
-        <select
-          value={status}
-          onChange={(e) => {
-            setStatus(e.target.value);
-
-            setPage(1);
-          }}
+        <div
           className="
+    flex
+    gap-3
+  "
+        >
+          <select
+            value={status}
+            onChange={(e) => {
+              setStatus(e.target.value);
+
+              setPage(1);
+            }}
+            className="
       rounded-xl
       border
       border-gray-300
@@ -108,11 +123,42 @@ export default function Content() {
       transition-colors
       focus:border-rose-500
     "
-        >
-          <option value="">All Status</option>
-          <option value="active">Active</option>
-          <option value="banned">Banned</option>
-        </select>
+          >
+            <option value="">All Status</option>
+            <option value="active">Active</option>
+            <option value="banned">Banned</option>
+          </select>
+
+          <button
+            type="button"
+            onClick={refresh}
+            disabled={loading}
+            className="
+      cursor-pointer
+      flex
+      h-12
+      w-12
+      items-center
+      justify-center
+      rounded-xl
+      border
+      border-gray-300
+      text-gray-600
+      transition-colors
+      hover:bg-gray-100
+      disabled:cursor-not-allowed
+      disabled:opacity-50
+    "
+          >
+            <ArrowPathIcon
+              className={`
+        h-5
+        w-5
+        ${loading ? "animate-spin" : ""}
+      `}
+            />
+          </button>
+        </div>
       </div>
 
       <div

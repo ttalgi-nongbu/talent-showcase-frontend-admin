@@ -84,5 +84,16 @@ export const API_ENDPOINTS = {
 
       activate: (id: number) => `${API_URL}/admin/talents/${id}/activate`,
     },
+
+    //
+    // SKILL
+    //
+    skill: {
+      root: `${API_URL}/admin/skills`,
+
+      verify: (id: number) => `${API_URL}/admin/skills/${id}/verify`,
+
+      unverify: (id: number) => `${API_URL}/admin/skills/${id}/unverify`,
+    },
   },
 };

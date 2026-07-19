@@ -9,6 +9,7 @@ import { usePathname } from "next/navigation";
 import {
   HomeIcon,
   UsersIcon,
+  SparklesIcon,
   EllipsisHorizontalIcon,
   ArrowLeftStartOnRectangleIcon,
   XMarkIcon,
@@ -90,6 +91,11 @@ export default function Sidebar() {
       name: "Talent Management",
       href: "/talents",
       icon: UsersIcon,
+    },
+    {
+      name: "Skill Management",
+      href: "/skills",
+      icon: SparklesIcon,
     },
   ];
 

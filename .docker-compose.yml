@@ -1,0 +1,18 @@
+services:
+  frontend-admin:
+    container_name: talent-showcase-frontend-admin
+
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    restart: unless-stopped
+
+    ports:
+      - "3001:3001"
+
+    volumes:
+      - .:/app
+      - /app/node_modules
+
+    command: npm run dev

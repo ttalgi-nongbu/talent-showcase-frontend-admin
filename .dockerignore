@@ -1,28 +1,13 @@
-# Dependency
 node_modules
-
-# Next.js build
 .next
 
-# Git
 .git
 .gitignore
 
-# Docker
-Dockerfile
-docker-compose.yml
-
-# Environment
 .env.local
 
-# Editor
-.vscode
+README.md
+AGENTS.md
+CLAUDE.md
 
-# Log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# OS
-.DS_Store
-Thumbs.db
+npm-debug.log

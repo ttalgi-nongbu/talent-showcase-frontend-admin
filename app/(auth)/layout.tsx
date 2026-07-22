@@ -30,11 +30,17 @@ function AuthLayoutContent({ children }: { children: React.ReactNode }) {
   const { account, loading } = useAccount();
 
   //
-  // sudah login -> dashboard
+  // sudah login sebagai admin -> dashboard
   //
   useEffect(() => {
-    if (!loading && account) {
+    if (loading) {
+      return;
+    }
+
+    if (account?.role === "admin") {
       router.replace("/");
+
+      return;
     }
   }, [loading, account, router]);
 
@@ -48,7 +54,7 @@ function AuthLayoutContent({ children }: { children: React.ReactNode }) {
   //
   // sedang redirect ke dashboard
   //
-  if (account) {
+  if (account?.role === "admin") {
     return null;
   }
 

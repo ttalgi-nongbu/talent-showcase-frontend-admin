@@ -12,3 +12,8 @@ export interface GetAccountResponse {
   message: string;
   success: boolean;
 }
+
+export interface ChangePasswordRequest {
+  current_password: string;
+  new_password: string;
+}

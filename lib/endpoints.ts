@@ -15,6 +15,7 @@ export const API_ENDPOINTS = {
   //
   user: {
     account: `${API_URL}/user`,
+    password: `${API_URL}/user/password`,
   },
 
   //

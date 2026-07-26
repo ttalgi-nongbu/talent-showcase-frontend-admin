@@ -54,9 +54,29 @@ export default function SettingsAccountContent() {
   //
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
+  //
+  // toggle delete account modal
+  //
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+
   return (
-    <div className="min-h-screen bg-white text-gray-900 py-12 px-4">
-      <div className="max-w-md mx-auto">
+    <div
+      className="
+    min-h-screen
+    bg-white
+    px-4
+    py-12
+    text-gray-900
+    sm:px-6
+  "
+    >
+      <div
+        className="
+      mx-auto
+      w-full
+      max-w-md
+    "
+      >
         {/* HEADER */}
         <div
           className="
@@ -70,21 +90,21 @@ export default function SettingsAccountContent() {
           <Link
             href="/explore"
             className="
-      absolute
-      left-0
-      rounded-lg
-      p-2
-      text-gray-400
-      transition
-      hover:bg-gray-100
-      hover:text-gray-600
-    "
+    absolute
+    left-0
+    rounded-lg
+    p-2
+    text-gray-400
+    transition
+    hover:bg-gray-100
+    hover:text-gray-600
+  "
           >
             <ArrowLeftIcon
               className="
-        h-5
-        w-5
-      "
+      h-5
+      w-5
+    "
             />
           </Link>
 
@@ -99,88 +119,99 @@ export default function SettingsAccountContent() {
         </div>
 
         {/* TITLE */}
-        <div className="text-center mb-10">
-          <h1 className="text-2xl font-bold text-gray-700">Account Settings</h1>
+        <div
+          className="
+    mb-10
+    text-center
+  "
+        >
+          <h1
+            className="
+      text-2xl
+      font-bold
+      text-gray-700
+    "
+          >
+            Account Settings
+          </h1>
 
-          <p className="text-sm text-gray-400 mt-2">
+          <p
+            className="
+      mt-2
+      text-sm
+      text-gray-400
+    "
+          >
             Manage your account information
           </p>
         </div>
 
         {/* CONTENT */}
-        <div className="space-y-5">
+        <div
+          className="
+    space-y-5
+  "
+        >
           {/* EMAIL */}
-          <div className="relative">
+          <div className="space-y-2">
+            <h2
+              className="
+      text-sm
+      font-medium
+      text-gray-700
+    "
+            >
+              Email
+            </h2>
+
             <input
               type="email"
               value={account?.email || ""}
               disabled
               className="
-                w-full
-                h-14
-                px-4
-                border
-                border-gray-300
-                rounded-xl
-                bg-gray-50
-                text-gray-500
-                cursor-not-allowed
-                focus:outline-none
-              "
+      h-14
+      w-full
+      rounded-xl
+      border
+      border-gray-300
+      bg-gray-50
+      px-4
+      text-gray-500
+      cursor-not-allowed
+      focus:outline-none
+    "
             />
-
-            <label
-              className="
-                pointer-events-none
-                absolute
-                left-4
-                top-0
-                -translate-y-1/2
-                bg-white
-                px-1
-                text-xs
-                text-gray-400
-              "
-            >
-              Email
-            </label>
           </div>
 
           {/* USERNAME */}
-          <div className="relative">
+          <div className="space-y-2">
+            <h2
+              className="
+      text-sm
+      font-medium
+      text-gray-700
+    "
+            >
+              Username
+            </h2>
+
             <input
               type="text"
               value={account?.username || ""}
               disabled
               className="
-                w-full
-                h-14
-                px-4
-                border
-                border-gray-300
-                rounded-xl
-                bg-gray-50
-                text-gray-500
-                cursor-not-allowed
-                focus:outline-none
-              "
+      h-14
+      w-full
+      rounded-xl
+      border
+      border-gray-300
+      bg-gray-50
+      px-4
+      text-gray-500
+      cursor-not-allowed
+      focus:outline-none
+    "
             />
-
-            <label
-              className="
-                pointer-events-none
-                absolute
-                left-4
-                top-0
-                -translate-y-1/2
-                bg-white
-                px-1
-                text-xs
-                text-gray-400
-              "
-            >
-              Username
-            </label>
           </div>
 
           {/* PASSWORD SECTION */}
@@ -222,215 +253,266 @@ export default function SettingsAccountContent() {
               {openPassword && (
                 <form
                   onSubmit={actions.handleSubmit}
-                  className="mt-5 space-y-5"
+                  className="
+    mt-5
+    space-y-5
+  "
                 >
                   {/* CURRENT PASSWORD */}
-                  <div className="relative">
-                    <input
-                      type={showCurrentPassword ? "text" : "password"}
-                      placeholder=" "
-                      value={form.currentPassword}
-                      onChange={(e) =>
-                        actions.setCurrentPassword(e.target.value)
-                      }
+                  <div className="space-y-2">
+                    <h2
                       className="
-            peer
-            w-full
-            h-14
-            px-4
-            border
-            border-gray-300
-            rounded-xl
-            bg-white
-            text-gray-900
-            focus:outline-none
-            focus:ring-2
-            focus:ring-rose-200
-            focus:border-rose-400
-          "
-                    />
-
-                    <label
-                      className="
-            pointer-events-none
-            absolute
-            left-4
-            top-1/2
-            -translate-y-1/2
-            bg-white
-            px-1
-            text-base
-            text-gray-400
-            transition-all
-            peer-focus:top-0
-            peer-focus:text-xs
-            peer-focus:text-rose-500
-            peer-not-placeholder-shown:top-0
-            peer-not-placeholder-shown:text-xs
-          "
+      text-sm
+      font-medium
+      text-gray-700
+    "
                     >
                       Current Password
-                    </label>
+                      <span className="text-rose-500"> *</span>
+                    </h2>
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setShowCurrentPassword(!showCurrentPassword)
-                      }
-                      className="
-            absolute
-            right-4
-            top-1/2
-            -translate-y-1/2
-            text-gray-400
-            hover:text-rose-500
-            cursor-pointer
-          "
-                    >
-                      {showCurrentPassword ? (
-                        <EyeSlashIcon className="w-5 h-5" />
-                      ) : (
-                        <EyeIcon className="w-5 h-5" />
-                      )}
-                    </button>
+                    <div className="relative">
+                      <input
+                        type={showCurrentPassword ? "text" : "password"}
+                        placeholder=" "
+                        value={form.currentPassword}
+                        onChange={(e) =>
+                          actions.setCurrentPassword(e.target.value)
+                        }
+                        className="
+        peer
+        h-14
+        w-full
+        rounded-xl
+        border
+        border-gray-300
+        bg-white
+        px-4
+        pt-5
+        text-gray-900
+        transition
+        focus:border-rose-400
+        focus:outline-none
+        focus:ring-2
+        focus:ring-rose-200
+      "
+                      />
+
+                      <label
+                        className="
+        pointer-events-none
+        absolute
+        left-4
+        top-4
+        text-base
+        text-gray-400
+        transition-all
+        duration-200
+
+        peer-focus:top-2
+        peer-focus:text-xs
+        peer-focus:text-rose-500
+
+        peer-not-placeholder-shown:top-2
+        peer-not-placeholder-shown:text-xs
+      "
+                      >
+                        Current Password
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setShowCurrentPassword(!showCurrentPassword)
+                        }
+                        className="
+        absolute
+        right-4
+        top-1/2
+        -translate-y-1/2
+        cursor-pointer
+        text-gray-400
+        transition
+        hover:text-rose-500
+      "
+                      >
+                        {showCurrentPassword ? (
+                          <EyeSlashIcon className="h-5 w-5" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5" />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   {/* NEW PASSWORD */}
-                  <div className="relative">
-                    <input
-                      type={showNewPassword ? "text" : "password"}
-                      placeholder=" "
-                      value={form.newPassword}
-                      onChange={(e) => actions.setNewPassword(e.target.value)}
+                  <div className="space-y-2">
+                    <h2
                       className="
-            peer
-            w-full
-            h-14
-            px-4
-            border
-            border-gray-300
-            rounded-xl
-            bg-white
-            text-gray-900
-            focus:outline-none
-            focus:ring-2
-            focus:ring-rose-200
-            focus:border-rose-400
-          "
-                    />
-
-                    <label
-                      className="
-            pointer-events-none
-            absolute
-            left-4
-            top-1/2
-            -translate-y-1/2
-            bg-white
-            px-1
-            text-base
-            text-gray-400
-            transition-all
-            peer-focus:top-0
-            peer-focus:text-xs
-            peer-focus:text-rose-500
-            peer-not-placeholder-shown:top-0
-            peer-not-placeholder-shown:text-xs
-          "
+      text-sm
+      font-medium
+      text-gray-700
+    "
                     >
                       New Password
-                    </label>
+                      <span className="text-rose-500"> *</span>
+                    </h2>
 
-                    <button
-                      type="button"
-                      onClick={() => setShowNewPassword(!showNewPassword)}
-                      className="
-            absolute
-            right-4
-            top-1/2
-            -translate-y-1/2
-            text-gray-400
-            hover:text-rose-500
-            cursor-pointer
-          "
-                    >
-                      {showNewPassword ? (
-                        <EyeSlashIcon className="w-5 h-5" />
-                      ) : (
-                        <EyeIcon className="w-5 h-5" />
-                      )}
-                    </button>
+                    <div className="relative">
+                      <input
+                        type={showNewPassword ? "text" : "password"}
+                        placeholder=" "
+                        value={form.newPassword}
+                        onChange={(e) => actions.setNewPassword(e.target.value)}
+                        className="
+        peer
+        h-14
+        w-full
+        rounded-xl
+        border
+        border-gray-300
+        bg-white
+        px-4
+        pt-5
+        text-gray-900
+        transition
+        focus:border-rose-400
+        focus:outline-none
+        focus:ring-2
+        focus:ring-rose-200
+      "
+                      />
+
+                      <label
+                        className="
+        pointer-events-none
+        absolute
+        left-4
+        top-4
+        text-base
+        text-gray-400
+        transition-all
+        duration-200
+
+        peer-focus:top-2
+        peer-focus:text-xs
+        peer-focus:text-rose-500
+
+        peer-not-placeholder-shown:top-2
+        peer-not-placeholder-shown:text-xs
+      "
+                      >
+                        New Password
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={() => setShowNewPassword(!showNewPassword)}
+                        className="
+        absolute
+        right-4
+        top-1/2
+        -translate-y-1/2
+        cursor-pointer
+        text-gray-400
+        transition
+        hover:text-rose-500
+      "
+                      >
+                        {showNewPassword ? (
+                          <EyeSlashIcon className="h-5 w-5" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5" />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   {/* CONFIRM PASSWORD */}
-                  <div className="relative">
-                    <input
-                      type={showConfirmPassword ? "text" : "password"}
-                      placeholder=" "
-                      value={form.confirmPassword}
-                      onChange={(e) =>
-                        actions.setConfirmPassword(e.target.value)
-                      }
+                  <div className="space-y-2">
+                    <h2
                       className="
-            peer
-            w-full
-            h-14
-            px-4
-            border
-            border-gray-300
-            rounded-xl
-            bg-white
-            text-gray-900
-            focus:outline-none
-            focus:ring-2
-            focus:ring-rose-200
-            focus:border-rose-400
-          "
-                    />
-
-                    <label
-                      className="
-            pointer-events-none
-            absolute
-            left-4
-            top-1/2
-            -translate-y-1/2
-            bg-white
-            px-1
-            text-base
-            text-gray-400
-            transition-all
-            peer-focus:top-0
-            peer-focus:text-xs
-            peer-focus:text-rose-500
-            peer-not-placeholder-shown:top-0
-            peer-not-placeholder-shown:text-xs
-          "
+      text-sm
+      font-medium
+      text-gray-700
+    "
                     >
                       Confirm Password
-                    </label>
+                      <span className="text-rose-500"> *</span>
+                    </h2>
 
-                    <button
-                      type="button"
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
-                      className="
-            absolute
-            right-4
-            top-1/2
-            -translate-y-1/2
-            text-gray-400
-            hover:text-rose-500
-            cursor-pointer
-          "
-                    >
-                      {showConfirmPassword ? (
-                        <EyeSlashIcon className="w-5 h-5" />
-                      ) : (
-                        <EyeIcon className="w-5 h-5" />
-                      )}
-                    </button>
+                    <div className="relative">
+                      <input
+                        type={showConfirmPassword ? "text" : "password"}
+                        placeholder=" "
+                        value={form.confirmPassword}
+                        onChange={(e) =>
+                          actions.setConfirmPassword(e.target.value)
+                        }
+                        className="
+        peer
+        h-14
+        w-full
+        rounded-xl
+        border
+        border-gray-300
+        bg-white
+        px-4
+        pt-5
+        text-gray-900
+        transition
+        focus:border-rose-400
+        focus:outline-none
+        focus:ring-2
+        focus:ring-rose-200
+      "
+                      />
+
+                      <label
+                        className="
+        pointer-events-none
+        absolute
+        left-4
+        top-4
+        text-base
+        text-gray-400
+        transition-all
+        duration-200
+
+        peer-focus:top-2
+        peer-focus:text-xs
+        peer-focus:text-rose-500
+
+        peer-not-placeholder-shown:top-2
+        peer-not-placeholder-shown:text-xs
+      "
+                      >
+                        Confirm Password
+                      </label>
+
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setShowConfirmPassword(!showConfirmPassword)
+                        }
+                        className="
+        absolute
+        right-4
+        top-1/2
+        -translate-y-1/2
+        cursor-pointer
+        text-gray-400
+        transition
+        hover:text-rose-500
+      "
+                      >
+                        {showConfirmPassword ? (
+                          <EyeSlashIcon className="h-5 w-5" />
+                        ) : (
+                          <EyeIcon className="h-5 w-5" />
+                        )}
+                      </button>
+                    </div>
                   </div>
 
                   {/* SAVE BUTTON */}
@@ -443,15 +525,17 @@ export default function SettingsAccountContent() {
                       !form.confirmPassword
                     }
                     className={`
-    w-full
     h-14
+    w-full
     rounded-xl
     bg-rose-500
     text-white
     font-semibold
+    transition
     cursor-pointer
     hover:bg-rose-600
-    transition
+    disabled:cursor-not-allowed
+    disabled:hover:bg-rose-500
 
     ${
       !loading &&
@@ -491,11 +575,36 @@ export default function SettingsAccountContent() {
           </div>
 
           {/* LOGOUT */}
-          <div className="pt-4">
-            <div className="border-t border-gray-100 pt-6">
-              <h2 className="text-lg font-semibold text-gray-800">Logout</h2>
+          <div
+            className="
+    pt-4
+  "
+          >
+            <div
+              className="
+      border-t
+      border-gray-100
+      pt-6
+    "
+            >
+              <h2
+                className="
+        text-lg
+        font-semibold
+        text-gray-800
+      "
+              >
+                Logout
+              </h2>
 
-              <p className="mt-1 text-sm leading-6 text-gray-400">
+              <p
+                className="
+        mt-1
+        text-sm
+        leading-6
+        text-gray-400
+      "
+              >
                 Sign out from your account on this device.
               </p>
 
@@ -513,11 +622,13 @@ export default function SettingsAccountContent() {
         rounded-xl
         border
         border-gray-300
-        text-gray-700
         font-semibold
+        text-gray-700
         transition
-        hover:bg-gray-100
         cursor-pointer
+        hover:bg-gray-100
+        disabled:cursor-not-allowed
+        disabled:hover:bg-white
       "
               >
                 {logoutLoading ? (

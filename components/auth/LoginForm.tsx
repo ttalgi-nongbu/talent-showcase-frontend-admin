@@ -18,15 +18,18 @@ export default function LoginForm() {
   return (
     <div
       className="
-      min-h-screen
-      flex
-      items-center
-      justify-center
-      bg-white
-      text-gray-900
-      px-4
-      sm:px-6
-    "
+  min-h-screen
+  flex
+  justify-center
+  bg-white
+  px-4
+  pt-12
+  pb-8
+  text-gray-900
+
+  sm:px-6
+  sm:pt-20
+"
     >
       <div
         className="

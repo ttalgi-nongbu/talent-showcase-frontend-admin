@@ -19,45 +19,39 @@ export default function Content() {
   const { talent, loading, error } = useGetTalent(id);
 
   if (loading) {
-    return (
-      <section
-        className="
-          rounded-2xl
-          bg-white
-          p-8
-        "
-      >
-        Loading talent...
-      </section>
-    );
-  }
-
-  if (error) {
-    return (
-      <section
-        className="
-          rounded-2xl
-          bg-white
-          p-8
-          text-red-500
-        "
-      >
-        {error}
-      </section>
-    );
+    return null;
   }
 
   if (!talent) {
     return (
-      <section
+      <div
         className="
-          rounded-2xl
-          bg-white
-          p-8
-        "
+        h-[60vh]
+        flex
+        flex-col
+        items-center
+        justify-center
+      "
       >
-        Talent not found.
-      </section>
+        <h2
+          className="
+          text-3xl
+          font-bold
+          text-gray-800
+        "
+        >
+          404
+        </h2>
+
+        <p
+          className="
+          mt-2
+          text-gray-500
+        "
+        >
+          Talent not found.
+        </p>
+      </div>
     );
   }
 

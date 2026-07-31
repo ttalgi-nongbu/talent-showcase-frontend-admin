@@ -1,56 +1,83 @@
 "use client";
 
+import { useCallback, useEffect, useState } from "react";
+
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import EngagementAnalytics from "./engagement-analytics/EngagementAnalytics";
 import PhotoAnalytics from "./photo-analytics/PhotoAnalytics";
 import ShowcaseAnalytics from "./showcase-analytics/ShowcaseAnalytics";
+import Tabs from "./Tabs";
 import TalentAnalytics from "./talent-analytics/TalentAnalytics";
 
 export default function Content() {
   const router = useRouter();
+
   const pathname = usePathname();
+
   const searchParams = useSearchParams();
 
-  const tab = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState(
+    searchParams.get("tab") ?? "talent",
+  );
 
-  function goToTalent() {
-    const params = new URLSearchParams(searchParams.toString());
+  useEffect(() => {
+    setActiveTab(searchParams.get("tab") ?? "talent");
+  }, [searchParams]);
 
-    params.delete("tab");
+  const handleTabChange = useCallback(
+    (tab: string) => {
+      const params = new URLSearchParams(searchParams.toString());
 
-    const query = params.toString();
+      if (tab === "talent") {
+        params.delete("tab");
+      } else {
+        params.set("tab", tab);
+      }
 
-    router.replace(query ? `${pathname}?${query}` : pathname);
-  }
+      router.replace(`${pathname}${params.toString() ? `?${params}` : ""}`, {
+        scroll: false,
+      });
+    },
+    [pathname, router, searchParams],
+  );
 
-  function goToShowcase() {
-    const params = new URLSearchParams(searchParams.toString());
+  useEffect(() => {
+    const tabs = ["talent", "showcase", "photo", "engagement"];
 
-    params.set("tab", "showcase");
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!event.ctrlKey) {
+        return;
+      }
 
-    router.replace(`${pathname}?${params.toString()}`);
-  }
+      const currentIndex = tabs.indexOf(activeTab);
 
-  function goToPhoto() {
-    const params = new URLSearchParams(searchParams.toString());
+      if (currentIndex === -1) {
+        return;
+      }
 
-    params.set("tab", "photo");
+      if (event.key === "ArrowUp") {
+        event.preventDefault();
 
-    router.replace(`${pathname}?${params.toString()}`);
-  }
+        handleTabChange(tabs[(currentIndex + 1) % tabs.length]);
+      }
 
-  function goToEngagement() {
-    const params = new URLSearchParams(searchParams.toString());
+      if (event.key === "ArrowDown") {
+        event.preventDefault();
 
-    params.set("tab", "engagement");
+        handleTabChange(tabs[(currentIndex - 1 + tabs.length) % tabs.length]);
+      }
+    };
 
-    router.replace(`${pathname}?${params.toString()}`);
-  }
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [activeTab, handleTabChange]);
 
   return (
     <>
-      {/* TITLE */}
       <h1
         className="
           text-3xl
@@ -61,100 +88,14 @@ export default function Content() {
         Dashboard
       </h1>
 
-      {/* TABS */}
-      <div
-        className="
-          mt-6
-          flex
-          gap-6
-          border-b
-          border-gray-200
-        "
-      >
-        <button
-          onClick={goToTalent}
-          className={`
-            cursor-pointer
-            border-b-2
-            pb-3
-            text-sm
-            font-medium
-            transition-colors
-            ${
-              tab !== "showcase" && tab !== "photo" && tab !== "engagement"
-                ? "border-black text-black"
-                : "border-transparent text-gray-500 hover:text-black"
-            }
-          `}
-        >
-          Talent Analytics
-        </button>
+      <Tabs activeTab={activeTab} onChange={handleTabChange} />
 
-        <button
-          onClick={goToShowcase}
-          className={`
-            cursor-pointer
-            border-b-2
-            pb-3
-            text-sm
-            font-medium
-            transition-colors
-            ${
-              tab === "showcase"
-                ? "border-black text-black"
-                : "border-transparent text-gray-500 hover:text-black"
-            }
-          `}
-        >
-          Showcase Analytics
-        </button>
-
-        <button
-          onClick={goToPhoto}
-          className={`
-            cursor-pointer
-            border-b-2
-            pb-3
-            text-sm
-            font-medium
-            transition-colors
-            ${
-              tab === "photo"
-                ? "border-black text-black"
-                : "border-transparent text-gray-500 hover:text-black"
-            }
-          `}
-        >
-          Photo Analytics
-        </button>
-
-        <button
-          onClick={goToEngagement}
-          className={`
-            cursor-pointer
-            border-b-2
-            pb-3
-            text-sm
-            font-medium
-            transition-colors
-            ${
-              tab === "engagement"
-                ? "border-black text-black"
-                : "border-transparent text-gray-500 hover:text-black"
-            }
-          `}
-        >
-          Engagement Analytics
-        </button>
-      </div>
-
-      {/* CONTENT */}
       <div className="mt-6">
-        {tab === "showcase" ? (
+        {activeTab === "showcase" ? (
           <ShowcaseAnalytics />
-        ) : tab === "photo" ? (
+        ) : activeTab === "photo" ? (
           <PhotoAnalytics />
-        ) : tab === "engagement" ? (
+        ) : activeTab === "engagement" ? (
           <EngagementAnalytics />
         ) : (
           <TalentAnalytics />

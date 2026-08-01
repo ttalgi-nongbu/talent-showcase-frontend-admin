@@ -4,11 +4,8 @@ import { useCallback, useEffect, useState } from "react";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import EngagementAnalytics from "./engagement-analytics/EngagementAnalytics";
-import PhotoAnalytics from "./photo-analytics/PhotoAnalytics";
-import ShowcaseAnalytics from "./showcase-analytics/ShowcaseAnalytics";
 import Tabs from "./Tabs";
-import TalentAnalytics from "./talent-analytics/TalentAnalytics";
+import TabContent from "./tab-content/TabContent";
 
 export default function Content() {
   const router = useRouter();
@@ -90,17 +87,7 @@ export default function Content() {
 
       <Tabs activeTab={activeTab} onChange={handleTabChange} />
 
-      <div className="mt-6">
-        {activeTab === "showcase" ? (
-          <ShowcaseAnalytics />
-        ) : activeTab === "photo" ? (
-          <PhotoAnalytics />
-        ) : activeTab === "engagement" ? (
-          <EngagementAnalytics />
-        ) : (
-          <TalentAnalytics />
-        )}
-      </div>
+      <TabContent activeTab={activeTab} />
     </>
   );
 }

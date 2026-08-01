@@ -32,10 +32,9 @@ export default function Content() {
         params.set("tab", tab);
       }
 
-      router.replace(`${pathname}${params.toString() ? `?${params}` : ""}`, {
-        scroll: false,
-      });
+      window.location.href = `${pathname}${params.toString() ? `?${params}` : ""}`;
     },
+
     [pathname, router, searchParams],
   );
 
